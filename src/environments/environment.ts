@@ -6,6 +6,15 @@ export const environment = {
   production: false
 };
 
+export const firebaseConfig = {
+  apiKey: 'AIzaSyCNpXj8z9X24UDxjpaHSa68AScit1V7Qq0',
+  authDomain: 'mobilite-ebay.firebaseapp.com',
+  projectId: 'mobilite-ebay',
+  storageBucket: 'mobilite-ebay.appspot.com',
+  messagingSenderId: '485995006488',
+  appId: '1:485995006488:web:4fe04acb8a495bca35d16d'
+};
+
 /*
  * For easier debugging in development mode, you can import the following file
  * to ignore zone related error stack frames such as `zone.run`, `zoneDelegate.invokeTask`.

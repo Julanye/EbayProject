@@ -4,41 +4,61 @@
       <!-- Logo -->
       <img src="assets/icon/inscription-img.jpg">
       <!--Login and Password Input with stacked label-->
-      <ion-item>
-        <ion-label position="stacked">Login</ion-label>
-        <ion-input clearInput type="mail" placeholder="abdc@gmail.com"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label position="stacked">Mot de passe</ion-label>
-        <ion-input clearInput type="password" placeholder="1MotdePasseFort!$"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label position="stacked">Nom</ion-label>
-        <ion-input clearInput placeholder="Martin"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label position="stacked">Prénom</ion-label>
-        <ion-input clearInput placeholder="Matin"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label position="stacked">Adresse</ion-label>
-        <!--TODO Adresse par géolocalisation cependant s'il est à la fac ça aide pas -->
-        <ion-input clearInput></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label position="stacked">Photo</ion-label>
-        <ion-avatar>
-          <!--TODO Gérer l'importation d'images-->
-          <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
-        </ion-avatar>
-      </ion-item>
-      <ion-button href="/home" (click)="$event">S'inscrire</ion-button>
+      <form [formGroup]="validationsForm">
+        <ion-item>
+          <ion-label position="stacked" >Login</ion-label>
+          <ion-input clearInput type="mail" placeholder="abdc@gmail.com" formControlName="mail"></ion-input>
+        </ion-item>
+        <div class="validation-errors">
+          <ng-container *ngFor="let validation of validationMessages.mail">
+            <div class="error_message"
+                 *ngIf="validationsForm.get('mail').hasError(validation.type) && (validationsForm.get('mail').dirty || validationsForm.get('mail').touched)">
+              {{ validation.message }}
+            </div>
+          </ng-container>
+        </div>
+        <ion-item>
+          <ion-label position="stacked" >Mot de passe</ion-label>
+          <ion-input clearInput type="password" placeholder="1MotdePasseFort!$" formControlName="mdp"></ion-input>
+        </ion-item>
+        <div class="validation-errors">
+          <ng-container *ngFor="let validation of validationMessages.password">
+            <div class="error_message"
+                 *ngIf="validationsForm.get('mdp').hasError(validation.type) && (validationsForm.get('mdp').dirty || validationsForm.get('mdp').touched)">
+              {{ validation.message }}
+            </div>
+          </ng-container>
+        </div>
+        <ion-item>
+          <ion-label position="stacked" >Nom</ion-label>
+          <ion-input clearInput placeholder="Martin" formControlName="nom"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="stacked">Prénom</ion-label>
+          <ion-input clearInput placeholder="Matin"  formControlName="prenom"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="stacked" >Adresse</ion-label>
+          <!--TODO Adresse par géolocalisation cependant s'il est à la fac ça aide pas -->
+          <ion-input formControlName="adresse" clearInput></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="stacked">Photo</ion-label>
+          <ion-avatar>
+            <!--TODO Gérer l'importation d'images-->
+            <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
+          </ion-avatar>
+        </ion-item>
+        <ion-button href="/home" (click)="$event">S'inscrire</ion-button>
+      </form>
+
     </ion-col>
   </ion-row>
   <ion-row>
     <ion-col>
       <p>Déjà inscrit ?</p>
-      <ion-button size="small" fill="outline" href="/connexion">Se connecter</ion-button>
+      <ion-button size="small" fill="outline" href="/connexion" type="submit" [disabled]="!validationsForm.valid">Se connecter</ion-button>
     </ion-col>
   </ion-row>
 </ion-content>

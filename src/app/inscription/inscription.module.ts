@@ -7,13 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { InscriptionPageRoutingModule } from './inscription-routing.module';
 
 import { InscriptionPage } from './inscription.page';
+import { ReactiveFormsModule} from '@angular/forms';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    InscriptionPageRoutingModule
+    InscriptionPageRoutingModule,
+    ReactiveFormsModule
   ],
   declarations: [InscriptionPage]
 })
