@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "mobilite-ebay": {
+      "hosting": {
+        "app": [
+          "mobilite-ebay"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "mobilite-ebay"
+  }
+}
