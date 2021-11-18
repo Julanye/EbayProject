@@ -7,6 +7,14 @@ const routes: Routes = [
   {
     path: '',
     component: EncheresPage
+  },
+  {
+    path: 'mes-achats',
+    loadChildren: () => import('../encheres-tabs/mes-achats/mes-achats.module').then(m => m.MesAchatsPageModule)
+  },
+  {
+    path: 'mes-ventes',
+    loadChildren: () => import('../encheres-tabs/mes-ventes/mes-ventes.module').then(m => m.MesVentesPageModule)
   }
 ];
 

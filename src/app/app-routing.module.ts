@@ -21,7 +21,19 @@ const routes: Routes = [
   },
   {
     path: 'encheres',
-    loadChildren: () => import('./encheres/encheres.module').then( m => m.EncheresPageModule)
+    loadChildren: () => import('./encheres/encheres.module').then(m => m.EncheresPageModule)
+  },
+  {
+    path: 'mes-encheres',
+    loadChildren: () => import('./mes-encheres/mes-encheres.module').then( m => m.MesEncheresPageModule)
+  },
+  {
+    path: 'une-enchere',
+    loadChildren: () => import('./une-enchere/une-enchere.module').then( m => m.UneEncherePageModule)
+  },
+  {
+    path: 'mon-profil',
+    loadChildren: () => import('./mon-profil/mon-profil.module').then( m => m.MonProfilPageModule)
   },
 ];
 

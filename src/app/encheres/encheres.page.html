@@ -1,18 +1,20 @@
 <ion-header>
   <ion-toolbar>
-    <ion-item>
-      <ion-thumbnail slot="start">
-        <ion-button>
-        <ion-icon src="assets/icon/menu-outline.svg"></ion-icon>
-        </ion-button>
-      </ion-thumbnail>
-      <ion-label>
-        <h2>Autour de moi</h2>
-      </ion-label>
-    </ion-item>
+    <ion-button fill="clear" slot="start">
+      <ion-menu-button color="dark" menu="main-menu"></ion-menu-button>
+    </ion-button>
+    <ion-title size="large">Autour de moi</ion-title>
   </ion-toolbar>
 </ion-header>
-
 <ion-content>
-
+<ion-card *ngFor="let enchere of encheresList">
+  <ion-icon name='bag-handle'></ion-icon>
+  <ion-card-title>{{enchere.enchereNom}}</ion-card-title>
+  <ion-card-subtitle>{{enchere.enchereDescription}}</ion-card-subtitle>
+  <ion-item>
+    <ion-card-content>{{enchere.encherePrix}}</ion-card-content>
+    <ion-button fill="outline">5:00</ion-button>
+    <ion-button>Enchérir</ion-button>
+  </ion-item>
+</ion-card>
 </ion-content>

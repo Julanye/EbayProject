@@ -1,0 +1,38 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-button fill="clear" slot="start">
+      <ion-menu-button color="dark" menu="main-menu"></ion-menu-button>
+    </ion-button>
+    <ion-title size="large">Mon profil</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <div class="padding">
+    <div class="logo">
+      <!--TODO Gérer l'importation d'images-->
+      <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
+    </div>
+    <ion-item>
+      <ion-label position="stacked">Login</ion-label>
+      <ion-input disabled="true" type="mail" >login.test@gmail.com</ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked">Mot de passe</ion-label>
+      <ion-input disabled="true" type="password">MotDePasseTest1</ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked">Nom</ion-label>
+      <ion-input disabled="true">NomTest</ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked">Prénom</ion-label>
+      <ion-input disabled="true">PrénomTest</ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked">Adresse</ion-label>
+      <!--TODO Adresse par géolocalisation cependant s'il est à la fac ça aide pas -->
+      <ion-input disabled="true">AdresseTest 31000 Toulouse</ion-input>
+    </ion-item>
+  </div>
+</ion-content>
+

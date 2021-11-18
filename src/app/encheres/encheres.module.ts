@@ -1,11 +1,8 @@
-import { NgModule } from '@angular/core';
+import {Component, NgModule} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-
-import { IonicModule } from '@ionic/angular';
-
+import {IonicModule, MenuController} from '@ionic/angular';
 import { EncheresPageRoutingModule } from './encheres-routing.module';
-
 import { EncheresPage } from './encheres.page';
 
 @NgModule({
@@ -13,8 +10,11 @@ import { EncheresPage } from './encheres.page';
     CommonModule,
     FormsModule,
     IonicModule,
-    EncheresPageRoutingModule
+    EncheresPageRoutingModule,
   ],
   declarations: [EncheresPage]
 })
-export class EncheresPageModule {}
+
+export class EncheresPageModule {
+  constructor() { }
+}

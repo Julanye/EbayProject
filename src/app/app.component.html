@@ -1,3 +1,32 @@
-<ion-app>
-  <ion-router-outlet></ion-router-outlet>
+<ion-app><ion-menu side="start" menuId="main-menu" contentId="main">
+  <ion-header>
+    <ion-toolbar color="light">
+      <ion-title>Menu</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content>
+    <ion-list>
+      <!--Menu toggle permet de fermer automatiquement le menu quand un user clique-->
+      <ion-menu-toggle>
+        <ion-item routerLink="/mes-encheres">
+          <ion-icon slot="start" name='bag-handle'></ion-icon>
+          <ion-label>Mes enchères</ion-label>
+        </ion-item>
+        <ion-item routerLink="/encheres">
+          <ion-icon slot="start" name='paper-plane'></ion-icon>
+          <ion-label>Autour de moi</ion-label>
+        </ion-item>
+        <ion-item routerLink="/mon-profil">
+          <ion-icon slot="start" src="assets/icon/person.svg"></ion-icon>
+          <ion-label>Mon profil</ion-label>
+        </ion-item>
+        <ion-item routerLink="/connexion">
+          <ion-icon slot="start" name='alert-circle'></ion-icon>
+          <ion-label>Déconnexion</ion-label>
+        </ion-item>
+      </ion-menu-toggle>
+    </ion-list>
+  </ion-content>
+</ion-menu>
+  <ion-router-outlet id="main"></ion-router-outlet>
 </ion-app>
