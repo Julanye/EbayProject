@@ -1,26 +1,42 @@
 <ion-content>
-  <div class="padding">
-    <div class="logo">
-      <!-- Logo -->
-      <img src="assets/icon/inscription-img.jpg">
+  <form [formGroup]="validationsForm">
+    <div class="padding">
+      <div class="logo">
+        <!-- Logo -->
+        <img src="assets/icon/inscription-img.jpg">
+      </div>
+      <!--Login and Password Input with stacked label-->
+      <ion-item>
+        <ion-label position="stacked">Login</ion-label>
+        <ion-input clearInput placeholder="abdc@gmail.com" formControlName="mail" #email></ion-input>
+      </ion-item>
+      <div class="validation-errors">
+        <ng-container *ngFor="let validation of validationMessages.mail">
+          <div class="error-message" *ngIf="validationsForm.get('mail').hasError(validation.type) && (validationsForm.get('mail').dirty || validationsForm.get('mail').touched)">
+            {{ validation.message }}
+          </div>
+        </ng-container>
+      </div>
+      <br>
+      <ion-item>
+        <ion-label position="stacked">Mot de passe</ion-label>
+        <ion-input clearInput type="password" placeholder="1MotdePasseFort!$" formControlName="mdp" #password></ion-input>
+      </ion-item>
+      <div class="validation-errors">
+        <ng-container *ngFor="let validation of validationMessages.mdp">
+          <div class="error-message" *ngIf="validationsForm.get('mdp').hasError(validation.type) && (validationsForm.get('mdp').dirty || validationsForm.get('mdp').touched)">
+            {{ validation.message }}
+          </div>
+        </ng-container>
+      </div>
     </div>
-    <!--Login and Password Input with stacked label-->
-    <ion-item>
-      <ion-label position="stacked">Login</ion-label>
-      <ion-input clearInput placeholder="abdc@gmail.com"></ion-input>
-    </ion-item>
     <br>
-    <ion-item>
-      <ion-label position="stacked">Mot de passe</ion-label>
-    <ion-input clearInput type="password" placeholder="1MotdePasseFort!$"></ion-input>
-    </ion-item>
-  </div>
-  <br>
-  <div align="center">
-      <ion-button routerLink="/encheres">Se connecter</ion-button>
-  </div>
-  <div align="center">
-    <p>Pas encore inscrit ?</p>
-    <ion-button size="small" fill="outline" routerLink="/inscription">S'inscrire</ion-button>
-  </div>
+    <div align="center">
+      <ion-button type="submit" (click)="logIn(email, password)" [disabled]="!validationsForm.valid">Se connecter</ion-button>
+    </div>
+    <div align="center">
+      <p>Pas encore inscrit ?</p>
+      <ion-button size="small" fill="outline" routerLink="/inscription">S'inscrire</ion-button>
+    </div>
+  </form>
 </ion-content>
