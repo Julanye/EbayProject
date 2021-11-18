@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import { Router } from '@angular/router';
+import { AuthenticationService } from '../auth/authentification-service';
 
 @Component({
   selector: 'app-inscription',
@@ -21,7 +23,9 @@ export class InscriptionPage implements OnInit {
     ]
   };
   constructor(
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    public authService: AuthenticationService,
+    public router: Router
   ) {
 
   }
@@ -45,6 +49,15 @@ export class InscriptionPage implements OnInit {
       adresse: new FormControl('', Validators.compose([
         Validators.required
       ]))
+    });
+  }
+
+  signUp(email, password){
+    this.authService.registerUser(email.value, password.value)
+      .then((res) => {
+        // Do something here
+      }).catch((error) => {
+      window.alert(error.message);
     });
   }
 }

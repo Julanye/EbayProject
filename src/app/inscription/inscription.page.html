@@ -16,7 +16,7 @@
     <form [formGroup]="validationsForm">
     <ion-item>
       <ion-label position="stacked">Login</ion-label>
-      <ion-input clearInput type="mail" placeholder="abdc@gmail.com" formControlName="mail"></ion-input>
+      <ion-input clearInput type="mail" #email placeholder="abdc@gmail.com" formControlName="mail"></ion-input>
     </ion-item>
       <div class="validation-errors">
         <ng-container *ngFor="let validation of validationMessages.mail">
@@ -28,7 +28,7 @@
       </div>
     <ion-item>
       <ion-label position="stacked">Mot de passe</ion-label>
-      <ion-input clearInput type="password" placeholder="1MotdePasseFort!$" formControlName="mdp"></ion-input>
+      <ion-input clearInput type="password" #password placeholder="1MotdePasseFort!$" formControlName="mdp"></ion-input>
     </ion-item>
       <div class="validation-errors">
         <ng-container *ngFor="let validation of validationMessages.password">
@@ -51,10 +51,10 @@
       <!--TODO Adresse par géolocalisation cependant s'il est à la fac ça aide pas -->
       <ion-input clearInput formControlName="adresse"></ion-input>
     </ion-item>
+      <br>
+      <div align="center">
+        <ion-button routerLink="/encheres" type="submit" (click)="signUp(email, password)">S'inscrire</ion-button>
+      </div>
     </form>
-    <br>
-    <div align="center">
-    <ion-button routerLink="/encheres" (click)="$event">S'inscrire</ion-button>
-    </div>
   </div>
 </ion-content>
