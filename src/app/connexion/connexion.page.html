@@ -8,27 +8,15 @@
       <!--Login and Password Input with stacked label-->
       <ion-item>
         <ion-label position="stacked">Login</ion-label>
-        <ion-input clearInput placeholder="abdc@gmail.com" formControlName="mail" #email></ion-input>
+        <ion-input clearInput placeholder="abdc@gmail.com" formControlName="email" #email></ion-input>
       </ion-item>
-      <div class="validation-errors">
-        <ng-container *ngFor="let validation of validationMessages.mail">
-          <div class="error-message" *ngIf="validationsForm.get('mail').hasError(validation.type) && (validationsForm.get('mail').dirty || validationsForm.get('mail').touched)">
-            {{ validation.message }}
-          </div>
-        </ng-container>
-      </div>
+
       <br>
       <ion-item>
         <ion-label position="stacked">Mot de passe</ion-label>
-        <ion-input clearInput type="password" placeholder="1MotdePasseFort!$" formControlName="mdp" #password></ion-input>
+        <ion-input clearInput type="password" placeholder="1MotdePasseFort!$" formControlName="password" #password></ion-input>
       </ion-item>
-      <div class="validation-errors">
-        <ng-container *ngFor="let validation of validationMessages.mdp">
-          <div class="error-message" *ngIf="validationsForm.get('mdp').hasError(validation.type) && (validationsForm.get('mdp').dirty || validationsForm.get('mdp').touched)">
-            {{ validation.message }}
-          </div>
-        </ng-container>
-      </div>
+
     </div>
     <br>
     <div align="center">

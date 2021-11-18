@@ -13,11 +13,11 @@ export class ConnexionPage implements OnInit {
   errorMessage: string;
 
   validationMessages = {
-    mail: [
+    email: [
       {type: 'required', message: 'Adresse email requise'},
       {type: 'pattern', message: 'Merci de saisir un adresse mail valide.'}
     ],
-    mdp: [
+    password: [
       {type: 'required', message: 'Mot de passe requis'},
       {type: 'minlength', message: 'Le mot de passe doit contenir au moins 5 caractères.'}
     ]

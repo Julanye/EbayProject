@@ -15,10 +15,11 @@ import { AngularFireStorageModule } from '@angular/fire/storage';
 
 // Environment
 import { environment } from '../environments/environment';
-import {VerificationEmailComponent} from "./verification-email/verification-email.component";
+import {AngularFirestore} from '@angular/fire/firestore';
+import 'firebase/firestore';
 
 @NgModule({
-  declarations: [AppComponent, VerificationEmailComponent],
+  declarations: [AppComponent],
   entryComponents: [],
   imports: [
     BrowserModule,
@@ -29,7 +30,7 @@ import {VerificationEmailComponent} from "./verification-email/verification-emai
     AngularFireDatabaseModule,
     AngularFireStorageModule
   ],
-  providers: [{provide: RouteReuseStrategy, useClass: IonicRouteStrategy}],
+  providers: [{provide: RouteReuseStrategy, useClass: IonicRouteStrategy}, AngularFirestore],
   bootstrap: [AppComponent],
 })
 export class AppModule {

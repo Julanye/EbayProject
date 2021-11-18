@@ -39,6 +39,11 @@ const routes: Routes = [
     path: 'creer-enchere',
     loadChildren: () => import('./creer-enchere/creer-enchere.module').then( m => m.CreerEncherePageModule)
   },
+  {
+    path: 'verification-email',
+    loadChildren: () => import('./verification-email/verification-email.module').then(m => m.VerificationEmailPageModule)
+  }
+
 ];
 
 @NgModule({

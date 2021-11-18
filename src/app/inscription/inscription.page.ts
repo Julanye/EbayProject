@@ -57,7 +57,7 @@ export class InscriptionPage implements OnInit {
       .then((res) => {
         // Do something here
         this.authService.sendVerificationMail()
-        this.router.navigate(['verification-email']);
+        this.router.navigate(['/verification-email']);
       }).catch((error) => {
       window.alert(error.message);
     });
