@@ -35,6 +35,10 @@ const routes: Routes = [
     path: 'mon-profil',
     loadChildren: () => import('./mon-profil/mon-profil.module').then( m => m.MonProfilPageModule)
   },
+  {
+    path: 'creer-enchere',
+    loadChildren: () => import('./creer-enchere/creer-enchere.module').then( m => m.CreerEncherePageModule)
+  },
 ];
 
 @NgModule({
