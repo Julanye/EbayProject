@@ -15,9 +15,10 @@ import { AngularFireStorageModule } from '@angular/fire/storage';
 
 // Environment
 import { environment } from '../environments/environment';
+import {VerificationEmailComponent} from "./verification-email/verification-email.component";
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, VerificationEmailComponent],
   entryComponents: [],
   imports: [
     BrowserModule,

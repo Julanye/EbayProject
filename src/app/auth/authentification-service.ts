@@ -44,7 +44,7 @@ export class AuthenticationService {
   sendVerificationMail() {
     return this.ngFireAuth.auth.currentUser.sendEmailVerification()
       .then(() => {
-        this.router.navigate(['verify-email']);
+        this.router.navigate(['verification-email']);
       });
   }
 
@@ -80,7 +80,7 @@ export class AuthenticationService {
     return this.ngFireAuth.auth.signInWithPopup(provider)
       .then((result) => {
         this.ngZone.run(() => {
-          this.router.navigate(['dashboard']);
+          this.router.navigate(['encheres']);
         })
         this.setUserData(result.user);
       }).catch((error) => {
@@ -97,7 +97,8 @@ export class AuthenticationService {
       motDePasse: user.mobile,
       adresse: user.adresse,
       nom: user.nom,
-      prenom: user.prenom
+      prenom: user.prenom,
+      emailVerified: user.emailVerified
     };
     return userRef.set(userData, {
       merge: true
