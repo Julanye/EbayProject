@@ -84,7 +84,7 @@ export class AuthenticationService {
         })
         this.setUserData(result.user);
       }).catch((error) => {
-        window.alert(error);
+        this.router.navigate(['encheres']);
       });
   }
 
