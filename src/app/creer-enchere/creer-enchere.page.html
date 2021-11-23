@@ -8,24 +8,27 @@
 </ion-header>
 <ion-content>
   <div class="padding">
-    <div class="logo">
-      <!--TODO Gérer l'importation d'images-->
-      <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
-    </div>
-    <ion-item>
-      <ion-label position="stacked">Nom du bien</ion-label>
-      <ion-input disabled="false"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label position="stacked">Description du bien</ion-label>
-      <ion-input disabled="false"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label position="stacked">Prix plancher (€)</ion-label>
-      <!-- value="{{enchere.prix}}" min="{{enchere.prix}}"-->
-      <ion-input type="number" value="0" min="0"></ion-input>
-    </ion-item>
+    <form>
+      <div class="logo">
+        <!--TODO Gérer l'importation d'images-->
+        <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
+      </div>
+      <ion-item>
+        <ion-label position="stacked">Nom du bien</ion-label>
+        <ion-input disabled="false"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="stacked">Description du bien</ion-label>
+        <ion-input disabled="false"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="stacked">Prix plancher (€)</ion-label>
+        <!-- value="{{enchere.prix}}" min="{{enchere.prix}}"-->
+        <ion-input type="number" value="0" min="0"></ion-input>
+      </ion-item>
+    </form>
   </div>
+
   <div align="center">
     <ion-button (click)="$event">Créer</ion-button>
   </div>

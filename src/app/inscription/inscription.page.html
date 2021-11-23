@@ -9,48 +9,50 @@
 
 <ion-content>
   <div class="padding">
-    <div class="logo">
-        <!--TODO Gérer l'importation d'images-->
-        <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
-    </div>
-    <form [formGroup]="validationsForm">
-    <ion-item>
-      <ion-label position="stacked">Login</ion-label>
-      <ion-input clearInput type="mail" #email placeholder="abdc@gmail.com" formControlName="mail"></ion-input>
-    </ion-item>
-      <div class="validation-errors">
-        <ng-container *ngFor="let validation of validationMessages.mail">
-          <div class="error_message"
-               *ngIf="validationsForm.get('mail').hasError(validation.type) && (validationsForm.get('mail').dirty || validationsForm.get('mail').touched)">
-            {{ validation.message }}
-          </div>
-        </ng-container>
+    <form>
+      <div class="logo">
+          <!--TODO Gérer l'importation d'images-->
+          <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
       </div>
-    <ion-item>
-      <ion-label position="stacked">Mot de passe</ion-label>
-      <ion-input clearInput type="password" #password placeholder="1MotdePasseFort!$" formControlName="mdp"></ion-input>
-    </ion-item>
-      <div class="validation-errors">
-        <ng-container *ngFor="let validation of validationMessages.password">
-          <div class="error_message"
-               *ngIf="validationsForm.get('mdp').hasError(validation.type) && (validationsForm.get('mdp').dirty || validationsForm.get('mdp').touched)">
-            {{ validation.message }}
-          </div>
-        </ng-container>
-      </div>
-    <ion-item>
-      <ion-label position="stacked">Nom</ion-label>
-      <ion-input clearInput placeholder="Martin" formControlName="nom"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label position="stacked">Prénom</ion-label>
-      <ion-input clearInput placeholder="Matin" formControlName="prenom"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label position="stacked">Adresse</ion-label>
-      <!--TODO Adresse par géolocalisation cependant s'il est à la fac ça aide pas -->
-      <ion-input clearInput formControlName="adresse"></ion-input>
-    </ion-item>
+      <form [formGroup]="validationsForm">
+      <ion-item>
+        <ion-label position="stacked">Login</ion-label>
+        <ion-input clearInput type="mail" #email placeholder="abdc@gmail.com" formControlName="mail"></ion-input>
+      </ion-item>
+        <div class="validation-errors">
+          <ng-container *ngFor="let validation of validationMessages.mail">
+            <div class="error_message"
+                 *ngIf="validationsForm.get('mail').hasError(validation.type) && (validationsForm.get('mail').dirty || validationsForm.get('mail').touched)">
+              {{ validation.message }}
+            </div>
+          </ng-container>
+        </div>
+      <ion-item>
+        <ion-label position="stacked">Mot de passe</ion-label>
+        <ion-input clearInput type="password" #password placeholder="1MotdePasseFort!$" formControlName="mdp"></ion-input>
+      </ion-item>
+        <div class="validation-errors">
+          <ng-container *ngFor="let validation of validationMessages.password">
+            <div class="error_message"
+                 *ngIf="validationsForm.get('mdp').hasError(validation.type) && (validationsForm.get('mdp').dirty || validationsForm.get('mdp').touched)">
+              {{ validation.message }}
+            </div>
+          </ng-container>
+        </div>
+      <ion-item>
+        <ion-label position="stacked">Nom</ion-label>
+        <ion-input clearInput placeholder="Martin" formControlName="nom"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="stacked">Prénom</ion-label>
+        <ion-input clearInput placeholder="Matin" formControlName="prenom"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="stacked">Adresse</ion-label>
+        <!--TODO Adresse par géolocalisation cependant s'il est à la fac ça aide pas -->
+        <ion-input clearInput formControlName="adresse"></ion-input>
+      </ion-item>
+    </form>
       <br>
       <div align="center">
         <ion-button type="submit" (click)="signUp(email, password)">S'inscrire</ion-button>
