@@ -41,20 +41,20 @@
         </div>
       <ion-item>
         <ion-label position="stacked">Nom</ion-label>
-        <ion-input clearInput placeholder="Martin" formControlName="nom"></ion-input>
+        <ion-input clearInput placeholder="Martin" formControlName="nom" #nom></ion-input>
       </ion-item>
       <ion-item>
         <ion-label position="stacked">Prénom</ion-label>
-        <ion-input clearInput placeholder="Matin" formControlName="prenom"></ion-input>
+        <ion-input clearInput placeholder="Matin" formControlName="prenom" #prenom></ion-input>
       </ion-item>
       <ion-item>
         <ion-label position="stacked">Adresse</ion-label>
-        <ion-input clearInput formControlName="adresse"></ion-input>
+        <ion-input clearInput formControlName="adresse" #adresse></ion-input>
       </ion-item>
     </form>
       <br>
       <div align="center">
-        <ion-button type="submit" (click)="signUp(email, password)">S'inscrire</ion-button>
+        <ion-button type="submit" (click)="signUp(email, password, adresse,  nom, prenom)">S'inscrire</ion-button>
       </div>
     </form>
   </div>

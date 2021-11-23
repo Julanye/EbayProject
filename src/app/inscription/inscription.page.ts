@@ -52,13 +52,13 @@ export class InscriptionPage implements OnInit {
     });
   }
 
-  signUp(email, password){
+  signUp(email, password, adresse, nom, prenom){
     this.authService.registerUser(email.value, password.value)
       .then((res) => {
-        this.authService.sendVerificationMail()
+        this.authService.sendVerificationMail();
         this.router.navigate(['/verification-email']);
       }).catch((error) => {
-      window.alert(error.message);
+      console.log(error);
     });
   }
 }
