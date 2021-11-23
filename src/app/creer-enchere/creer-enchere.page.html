@@ -7,31 +7,31 @@
   </ion-toolbar>
 </ion-header>
 <ion-content>
-  <div class="padding">
-    <form>
+  <form [formGroup]="creerEnchereForm" (ngSubmit)="formSubmit()">
+    <div class="padding">
+
       <div class="logo">
         <!--TODO Gérer l'importation d'images-->
         <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
       </div>
       <ion-item>
         <ion-label position="stacked">Nom du bien</ion-label>
-        <ion-input disabled="false"></ion-input>
+        <ion-input disabled="false" formControlName="nomBien" required></ion-input>
       </ion-item>
       <ion-item>
         <ion-label position="stacked">Description du bien</ion-label>
-        <ion-input disabled="false"></ion-input>
+        <ion-input disabled="false" formControlName="description" required></ion-input>
       </ion-item>
       <ion-item>
         <ion-label position="stacked">Prix plancher (€)</ion-label>
         <!-- value="{{enchere.prix}}" min="{{enchere.prix}}"-->
-        <ion-input type="number" value="0" min="0"></ion-input>
+        <ion-input type="number" value="0" min="0" formControlName="prix" required></ion-input>
       </ion-item>
-    </form>
-  </div>
-
-  <div align="center">
-    <ion-button (click)="$event">Créer</ion-button>
-  </div>
+    </div>
+    <div align="center">
+      <ion-button type="submit">Créer</ion-button>
+    </div>
+  </form>
 </ion-content>
 
 

@@ -22,12 +22,7 @@ export class CreerEncherePage implements OnInit {
     this.creerEnchereForm = this.fb.group({
       nomBien: [''],
       description: [''],
-      prix: [''],
-      dateCreation: [''],
-      createur: [''],
-      encherisseurs: [''],
-      livraison: [''],
-      statut: ['']
+      prix: ['']
     });
   }
   formSubmit() {

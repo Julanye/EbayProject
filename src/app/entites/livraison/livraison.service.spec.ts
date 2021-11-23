@@ -1,50 +1,16 @@
-import { Injectable } from '@angular/core';
-import { Livraison } from '../livraison/livraison';
-import { AngularFireDatabase, AngularFireList, AngularFireObject } from '@angular/fire/database';
+import { TestBed } from '@angular/core/testing';
 
-@Injectable({
-  providedIn: 'root'
-})
+import { LivraisonService } from './livraison.service';
 
-export class LivraisonService {
-  livraisonListRef: AngularFireList<any>;
-  livraisonRef: AngularFireObject<any>;
+describe('LivraisonService', () => {
+  let service: LivraisonService;
 
-  constructor(private db: AngularFireDatabase) { }
+  beforeEach(() => {
+    TestBed.configureTestingModule({});
+    service = TestBed.inject(LivraisonService);
+  });
 
-  // Create
-  createLivraison(livr: Livraison) {
-    return this.livraisonListRef.push({
-      date: livr.date,
-      lieu: livr.lieu,
-      mailAch: livr.mailAch
-    });
-  }
-
-  // Get Single
-  getLivraison(id: number) {
-    this.livraisonRef = this.db.object('/livraison/' + id);
-    return this.livraisonRef;
-  }
-
-  // Get List
-  getLivraisonList() {
-    this.livraisonListRef = this.db.list('/livraison');
-    return this.livraisonListRef;
-  }
-
-  // Update
-  updateLivraison(id, livr: Livraison) {
-    return this.livraisonRef.update({
-      date: livr.date,
-      lieu: livr.lieu,
-      mailAch: livr.mailAch
-    });
-  }
-
-  // Delete
-  deleteLivraison(id: string) {
-    this.livraisonRef = this.db.object('/encherisseurs/' + id);
-    this.livraisonRef.remove();
-  }
-}
+  it('should be created', () => {
+    expect(service).toBeTruthy();
+  });
+});

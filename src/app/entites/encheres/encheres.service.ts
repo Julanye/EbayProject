@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Encheres } from '../encheres/Encheres';
 import { AngularFireDatabase, AngularFireList, AngularFireObject } from '@angular/fire/database';
+import * as firebase from 'firebase';
 
 @Injectable({
   providedIn: 'root'
@@ -13,19 +14,33 @@ export class EncheresService {
   constructor(private db: AngularFireDatabase) { }
 
   // Create
+  /*
   createEncheres(ench: Encheres) {
+    console.log(ench.nomBien, ench.description, ench.prix);
+    console.log(this.encheresListRef);
     return this.encheresListRef.push({
       nomBien: ench.nomBien,
       description: ench.description,
-      prix: ench.prix,
-      dateCreation: ench.dateCreation,
-      createur: ench.createur,
-      encherisseurs: ench.encherisseurs,
-      livraison: ench.livraison,
-      statut: ench.statut
+      prix: ench.prix
+      //dateCreation: sysdate,
+      //createur: ench.createur,
+      //encherisseurs: null,
+      //livraison: null,
+      //statut: 'en cours';
     });
   }
-
+*/
+  createEncheres(ench) {
+    return new Promise<any>((resolve, reject) => {
+      const postData = {
+        nomBien: ench.nomBien,
+        description: ench.description,
+        prix: ench.prix
+      };
+      const ref = firebase.database().ref('/encheres/');
+      ref.push(postData);
+    });
+  }
   // Get Single
   getEncheres(id: number) {
     this.encheresRef = this.db.object('/encheres/' + id);
@@ -38,23 +53,4 @@ export class EncheresService {
     return this.encheresListRef;
   }
 
-  // Update
-  updateEncheres(id, ench: Encheres) {
-    return this.encheresRef.update({
-      nomBien: ench.nomBien,
-      description: ench.description,
-      prix: ench.prix,
-      dateCreation: ench.dateCreation,
-      createur: ench.createur,
-      encherisseurs: ench.encherisseurs,
-      livraison: ench.livraison,
-      statut: ench.statut
-    });
-  }
-
-  // Delete
-  deleteEncheres(id: string) {
-    this.encheresRef = this.db.object('/encheres/' + id);
-    this.encheresRef.remove();
-  }
 }

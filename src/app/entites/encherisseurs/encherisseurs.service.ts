@@ -31,18 +31,4 @@ export class EncherisseursService {
     this.encherisseursListRef = this.db.list('/encherisseurs');
     return this.encherisseursListRef;
   }
-
-  // Update
-  updateEncherisseurs(id, ench: Encherisseurs) {
-    return this.encherisseursRef.update({
-      mail: ench.mail,
-      prixEnchere: ench.prixEnchere,
-    });
-  }
-
-  // Delete
-  deleteEncherisseurs(id: string) {
-    this.encherisseursRef = this.db.object('/encherisseurs/' + id);
-    this.encherisseursRef.remove();
-  }
 }
