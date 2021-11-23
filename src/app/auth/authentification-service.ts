@@ -48,16 +48,6 @@ export class AuthenticationService {
       });
   }
 
-  // Recover password
-  passwordRecover(passwordResetEmail) {
-    return this.ngFireAuth.auth.sendPasswordResetEmail(passwordResetEmail)
-      .then(() => {
-        window.alert('Password reset email has been sent, please check your inbox.');
-      }).catch((error) => {
-        window.alert(error);
-      });
-  }
-
   // Returns true when user is looged in
   get isLoggedIn(): boolean {
     const user = JSON.parse(localStorage.getItem('user'));
