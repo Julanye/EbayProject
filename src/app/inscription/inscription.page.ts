@@ -55,7 +55,7 @@ export class InscriptionPage implements OnInit {
   signUp(email, password){
     this.authService.registerUser(email.value, password.value)
       .then((res) => {
-        // Do something here
+        console.log(res);
         this.authService.sendVerificationMail()
         this.router.navigate(['/verification-email']);
       }).catch((error) => {
