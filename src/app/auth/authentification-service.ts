@@ -60,31 +60,12 @@ export class AuthenticationService {
     return (user.emailVerified !== false);
   }
 
-  // Sign in with Gmail
-  googleAuth() {
-    return this.authLogin(new auth.GoogleAuthProvider());
-  }
-
-  // Auth providers
-  authLogin(provider) {
-    return this.ngFireAuth.auth.signInWithPopup(provider)
-      .then((result) => {
-        this.ngZone.run(() => {
-          this.router.navigate(['encheres']);
-        })
-        this.setUserData(result.user);
-      }).catch((error) => {
-        this.router.navigate(['encheres']);
-      });
-  }
-
   // Store user in localStorage
   setUserData(user) {
     const userRef: AngularFirestoreDocument<any> = this.afStore.doc(`users/${user.uid}`);
     const userData: User = {
       uid: user.uid,
-      mail: user.mail,
-      motDePasse: user.mobile,
+      mail: user.email,
       adresse: user.adresse,
       nom: user.nom,
       prenom: user.prenom,
