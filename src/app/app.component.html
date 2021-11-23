@@ -22,7 +22,7 @@
         </ion-item>
         <ion-item routerLink="/connexion">
           <ion-icon slot="start" name='alert-circle'></ion-icon>
-          <ion-label>Déconnexion</ion-label>
+          <ion-label (click)="authService.signOut()">Déconnexion</ion-label>
         </ion-item>
       </ion-menu-toggle>
     </ion-list>
