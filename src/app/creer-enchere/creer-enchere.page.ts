@@ -35,6 +35,7 @@ export class CreerEncherePage implements OnInit {
         this.router.navigate(['/home']);
       })
         .catch(error => console.log(error));
+      console.log(this.enchService.getEncheresList());
     }
   }
 }
