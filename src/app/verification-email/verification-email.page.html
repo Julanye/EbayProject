@@ -21,5 +21,9 @@
       <ion-icon name="paper-plane-outline"> </ion-icon>
       Renvoyez l'email de vérification
     </ion-button>
+    <ion-button (click)="authService.sendVerificationMail()" expand="block" shape="round" routerLink="/connexion" color="light">
+      <ion-icon name="log-in-outline"></ion-icon>
+      Connexion
+    </ion-button>
   </ion-grid>
 </ion-content>
