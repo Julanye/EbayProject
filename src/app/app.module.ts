@@ -8,13 +8,13 @@ import {AppComponent} from './app.component';
 import {AppRoutingModule} from './app-routing.module';
 
 // Firebase
-import { AngularFireModule } from '@angular/fire';
-import { AngularFireAuthModule } from '@angular/fire/auth';
-import { AngularFireDatabaseModule } from '@angular/fire/database';
-import { AngularFireStorageModule } from '@angular/fire/storage';
+import {AngularFireModule} from '@angular/fire';
+import {AngularFireAuthModule} from '@angular/fire/auth';
+import {AngularFireDatabaseModule} from '@angular/fire/database';
+import {AngularFireStorageModule} from '@angular/fire/storage';
 
 // Environment
-import { environment } from '../environments/environment';
+import {environment} from '../environments/environment';
 import {AngularFirestore} from '@angular/fire/firestore';
 import 'firebase/firestore';
 

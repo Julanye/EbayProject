@@ -1,3 +1,4 @@
+/*
 import { Injectable } from '@angular/core';
 import { Livraison } from '../livraison/livraison';
 import { AngularFireDatabase, AngularFireList, AngularFireObject } from '@angular/fire/database';
@@ -33,3 +34,4 @@ export class LivraisonService {
     return this.livraisonListRef;
   }
 }
+ */

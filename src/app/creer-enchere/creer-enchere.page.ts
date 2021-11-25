@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormGroup, FormBuilder } from '@angular/forms';
-import { EncheresService } from './../entites/encheres/encheres.service';
+import { FirebaseService } from './../entites/firebase.service';
 
 @Component({
   selector: 'app-creer-enchere',
@@ -13,7 +13,7 @@ export class CreerEncherePage implements OnInit {
   creerEnchereForm: FormGroup;
 
   constructor(
-    private enchService: EncheresService,
+    private fireService: FirebaseService,
     private router: Router,
     public fb: FormBuilder
   ) { }
@@ -29,13 +29,13 @@ export class CreerEncherePage implements OnInit {
     if (!this.creerEnchereForm.valid) {
       return false;
     } else {
-      this.enchService.createEncheres(this.creerEnchereForm.value).then(res => {
+      this.fireService.createEncheres(this.creerEnchereForm.value).then(res => {
         console.log(res);
         this.creerEnchereForm.reset();
         this.router.navigate(['/home']);
       })
         .catch(error => console.log(error));
-      console.log(this.enchService.getEncheresList());
+      console.log(this.fireService.getEncheresList());
     }
   }
 }

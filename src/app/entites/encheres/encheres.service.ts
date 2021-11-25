@@ -1,3 +1,4 @@
+/*
 import { Injectable } from '@angular/core';
 import { Encheres } from '../encheres/Encheres';
 import { AngularFireDatabase, AngularFireList, AngularFireObject } from '@angular/fire/database';
@@ -14,7 +15,6 @@ export class EncheresService {
   constructor(private db: AngularFireDatabase) { }
 
   // Create
-  /*
    createEncheres(ench: Encheres) {
      console.log(ench.nomBien, ench.description, ench.prix);
      console.log(this.encheresListRef);
@@ -29,7 +29,7 @@ export class EncheresService {
        //statut: 'en cours';
      });
    }
-     */
+
     createEncheres(ench) {
       console.log(ench.nomBien, ench.description, ench.prix);
       return new Promise<any>((resolve, reject) => {
@@ -59,7 +59,7 @@ export class EncheresService {
   }
 
 
-/*
+
 getEncheresList() {
   return new Promise<any>((resolve, reject) => {
     const starCountRef = firebase.database().ref('/encheres');
@@ -68,7 +68,8 @@ getEncheresList() {
     });
   });
 }
-*/
+
 
 }
+*/
 
