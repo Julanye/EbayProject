@@ -4,6 +4,7 @@ import { User } from './user';
 import { Router } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
+import * as firebase from 'firebase';
 
 @Injectable({
   providedIn: 'root'
@@ -30,17 +31,55 @@ export class AuthenticationService {
     });
   }
 
-  // Login in with email/password
+  /**
+   * Connexion à partir de l'adresse mail et du mot de passse
+   *
+   * @param email adresse mail de connexion
+   * @param password mot de passe
+   */
   signIn(email, password) {
     return this.ngFireAuth.auth.signInWithEmailAndPassword(email, password);
   }
 
-  // Register user with email/password
-  registerUser(email, password) {
-    return this.ngFireAuth.auth.createUserWithEmailAndPassword(email, password);
+  /**
+   * Inscription avec un mail/mot de passe
+   *
+   * @param value valeurs du formulaire d'inscription
+   */
+  registerUser(value) {
+    console.log(value);
+    const that = this;
+    return new Promise<any>((resolve, reject) => {
+      firebase.auth().createUserWithEmailAndPassword(value.mail, value.mdp)
+        .then(function(user) {
+          that.createUser(value);
+        });
+    });
   }
 
-  // Email verification when new user register
+  /**
+   * Création d'un utilisateur avec les infos du formulaire
+   *
+   * @param value valeurs du formulaire
+   */
+  createUser(value) {
+    const postData = {
+      prenom: value.prenom,
+      nom: value.nom,
+      email: value.mail,
+      adresse: value.adresse
+    };
+    console.log(postData);
+    this.ngFireAuth.user.subscribe(currentUser => {
+      const updates = {};
+      updates['/users/' + currentUser.uid] = postData;
+      firebase.database().ref().update(updates);
+    });
+  }
+
+  /**
+   * Envoie d'un mail de vérification lors de l'inscription d'un utilisateur
+   */
   sendVerificationMail() {
     return this.ngFireAuth.auth.currentUser.sendEmailVerification()
       .then(() => {
@@ -48,35 +87,18 @@ export class AuthenticationService {
       });
   }
 
-  // Returns true when user is looged in
-  get isLoggedIn(): boolean {
-    const user = JSON.parse(localStorage.getItem('user'));
-    return (user !== null && user.emailVerified !== false);
-  }
-
-  // Returns true when user's email is verified
+  /**
+   * Vérification de l'adresse mail
+   */
   get isEmailVerified(): boolean {
     const user = JSON.parse(localStorage.getItem('user'));
     return (user.emailVerified !== false);
   }
 
-  // Store user in localStorage
-  setUserData(user) {
-    const userRef: AngularFirestoreDocument<any> = this.afStore.doc(`users/${user.uid}`);
-    const userData: User = {
-      uid: user.uid,
-      mail: user.email,
-      adresse: user.adresse,
-      nom: user.nom,
-      prenom: user.prenom,
-      emailVerified: user.emailVerified
-    };
-    return userRef.set(userData, {
-      merge: true
-    });
-  }
 
-  // Sign-out
+  /**
+   * Deconnexion de l'utilisateur
+   */
   signOut() {
     return this.ngFireAuth.auth.signOut().then(() => {
       localStorage.removeItem('user');
