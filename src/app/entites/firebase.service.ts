@@ -1,7 +1,4 @@
 import {Injectable} from '@angular/core';
-import {Encherisseurs} from '../entites/encherisseurs/Encherisseurs';
-import {Encheres} from '../entites/encheres/Encheres';
-import {Livraison} from '../entites/livraison/Livraison';
 import {AngularFireDatabase, AngularFireList, AngularFireObject} from '@angular/fire/database';
 import * as firebase from 'firebase';
 
