@@ -6,6 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./encheres.page.scss'],
 })
 export class EncheresPage implements OnInit {
+  timeLeft = 300;
+  interval;
   encheresList=[
     {
       enchereNom:'Ballon signé Ronaldo',
@@ -27,6 +29,25 @@ export class EncheresPage implements OnInit {
   constructor() { }
 
   ngOnInit() {
+  }
+
+  startTimer() {
+    this.interval = setInterval(() => {
+      if(this.timeLeft > 0) {
+        this.timeLeft--;
+      } else {
+        this.timeLeft = 300;
+      }
+    },1000);
+  }
+
+  pauseTimer() {
+    clearInterval(this.interval);
+  }
+
+  transform(value: number): string {
+    const minutes: number = Math.floor(value / 60);
+    return minutes + ':' + (value - minutes * 60);
   }
 
 }
