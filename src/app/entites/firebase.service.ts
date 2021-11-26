@@ -13,23 +13,7 @@ export class FirebaseService {
   constructor(private db: AngularFireDatabase) {
   }
 
-  // Create
-  /*
-  createEncheres(ench: Encheres) {
-    console.log(ench.nomBien, ench.description, ench.prix);
-    console.log(this.encheresListRef);
-    return this.encheresListRef.push({
-      nomBien: ench.nomBien,
-      description: ench.description,
-      prix: ench.prix
-      //dateCreation: sysdate,
-      //createur: ench.createur,
-      //encherisseurs: null,
-      //livraison: null,
-      //statut: 'en cours';
-    });
-  }
-   */
+  // Creer une enchère
   createEncheres(ench) {
     return new Promise<any>((resolve, reject) => {
       const currentUser = firebase.auth().currentUser;
@@ -48,17 +32,31 @@ export class FirebaseService {
     });
   }
 
-  // Get Single
+  // Créer un encherisseur
+  createEncherisseurs(encheri) {
+    return new Promise<any>((resolve, reject) => {
+      const currentUser = firebase.auth().currentUser;
+      const postData = {
+        mail: currentUser.email,
+        prixEnchere: encheri.prixEnchere,
+      };
+      const ref = firebase.database().ref('/encherisseurs/');
+      ref.push(postData);
+    });
+  }
+
+  // récupérer une enchère
   getEncheres(id: number) {
     this.encheresRef = this.db.object('/encheres/' + id);
     return this.encheresRef;
   }
 
 
-  // Get List
+  // récupérer liste d'enchères
   getEncheresList() {
     this.encheresListRef = this.db.list('/encheres');
     return this.encheresListRef;
   }
+
 }
 
