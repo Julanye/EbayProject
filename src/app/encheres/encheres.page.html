@@ -13,7 +13,7 @@
   <ion-card-subtitle>{{enchere.description}}</ion-card-subtitle>
   <ion-item>
     <ion-card-content>{{enchere.prix}}</ion-card-content>
-    <ion-button fill="outline">5:00</ion-button>
+    <ion-button disabled="true" fill="outline">{{transform(timeLeft)}}</ion-button>
     <ion-button routerLink="/une-enchere">Enchérir</ion-button>
   </ion-item>
 </ion-card>

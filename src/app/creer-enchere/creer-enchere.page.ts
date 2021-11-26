@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { FormGroup, FormBuilder } from '@angular/forms';
-import { FirebaseService } from './../entites/firebase.service';
+import {Component, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
+import {FormGroup, FormBuilder} from '@angular/forms';
+import {FirebaseService} from '../entites/firebase.service';
 
 @Component({
   selector: 'app-creer-enchere',
@@ -16,15 +16,19 @@ export class CreerEncherePage implements OnInit {
     private fireService: FirebaseService,
     private router: Router,
     public fb: FormBuilder
-  ) { }
+  ) {
+  }
 
   ngOnInit() {
     this.creerEnchereForm = this.fb.group({
       nomBien: [''],
       description: [''],
-      prix: ['']
+      prix: [''],
+      dateCreation: [''],
+      createur: ['']
     });
   }
+
   formSubmit() {
     if (!this.creerEnchereForm.valid) {
       return false;
@@ -32,7 +36,7 @@ export class CreerEncherePage implements OnInit {
       this.fireService.createEncheres(this.creerEnchereForm.value).then(res => {
         console.log(res);
         this.creerEnchereForm.reset();
-        this.router.navigate(['/home']);
+        this.router.navigate(['/encheres']);
       })
         .catch(error => console.log(error));
       console.log(this.fireService.getEncheresList());
