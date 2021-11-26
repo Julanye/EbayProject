@@ -31,15 +31,19 @@ export class FirebaseService {
   }
    */
   createEncheres(ench) {
-    console.log(ench.nomBien, ench.description, ench.prix);
     return new Promise<any>((resolve, reject) => {
+      const currentUser = firebase.auth().currentUser;
+      const date = new Date();
       const postData = {
         nomBien: ench.nomBien,
         description: ench.description,
-        prix: ench.prix
+        prix: ench.prix,
+        dateCreation: date.getDate()+'/'+(date.getMonth()+1)+'/'+date.getFullYear(),
+        createur: currentUser.uid
       };
       const ref = firebase.database().ref('/encheres/');
       ref.push(postData);
+      console.log(ench.nomBien, ench.description, ench.prix, ench.dateCreation, currentUser);
       console.log(postData);
     });
   }
