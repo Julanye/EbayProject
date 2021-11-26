@@ -53,8 +53,13 @@ export class FirebaseService {
 
   // Get List
   getEncheresList() {
-    this.encheresListRef = this.db.list('/encheres');
-    return this.encheresListRef;
+    return new Promise<any>((resolve, reject) => {
+        const starCountRef = firebase.database().ref('/encheres/');
+      // eslint-disable-next-line prefer-arrow/prefer-arrow-functions
+        starCountRef.on('value', function(snapshot) {
+          resolve(snapshot.val());
+        });
+      }
+    );
   }
 }
-

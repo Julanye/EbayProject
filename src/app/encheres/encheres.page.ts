@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {FirebaseService} from '../entites/firebase.service';
 
 @Component({
   selector: 'app-encheres',
@@ -6,27 +7,26 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./encheres.page.scss'],
 })
 export class EncheresPage implements OnInit {
-  encheresList=[
-    {
-      enchereNom:'Ballon signé Ronaldo',
-      enchereDescription:'Ballon signé par le plus grand joueur de foot de tous les temps, Cristiano Ronaldo',
-      encherePrix:'5 000€'
-    },
-    {
-      enchereNom:'Maillot KCorp signé Rekkles',
-      enchereDescription:'Maillot signé par le plus grand joueur de LoL EUW de tous les temps, Martin Rekkles Larsson',
-      encherePrix:'50 000€'
-    },
-    {
-      enchereNom:'Maillot T1 signé Faker',
-      enchereDescription:'Ballon signé par le plus grand joueur de LoL de tous les temps, Lee Faker Sang-Hyeok',
-      encherePrix:'1 000 000€'
-    }
-  ];
+  public encheresList: Array<{ id: string; nomBien: string; description: string; prix: string }> = [];
 
-  constructor() { }
-
-  ngOnInit() {
+  constructor(private firebaseService: FirebaseService) {
   }
 
+  ngOnInit() {
+    this.initEncheresList(this.encheresList);
+  }
+
+  initEncheresList(encheresList) {
+    this.firebaseService.getEncheresList().then(encheres => { // Récupérer les lieux, regarder dans l'idUser.
+      for (const key of Object.keys(encheres)) {
+        const enchere = encheres[key];
+        encheresList.push({
+          id: key,
+          nomBien: enchere.nomBien,
+          description: enchere.description,
+          prix: enchere.prix
+        });
+      }
+    });
+  }
 }
