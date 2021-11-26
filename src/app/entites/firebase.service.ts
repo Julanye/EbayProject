@@ -45,6 +45,19 @@ export class FirebaseService {
     });
   }
 
+  // Créer une livraison
+  createLivraison(liv) {
+    return new Promise<any>((resolve, reject) => {
+      const postData = {
+        date: liv.date,
+        lieu: liv.lieu,
+        mailAch: /*Récupérer le mail du dernier encherisseur */,
+      };
+      const ref = firebase.database().ref('/livraison/');
+      ref.push(postData);
+    });
+  }
+
   // récupérer une enchère
   getEncheres(id: number) {
     this.encheresRef = this.db.object('/encheres/' + id);
@@ -56,8 +69,8 @@ export class FirebaseService {
   getEncheresList() {
     return new Promise<any>((resolve, reject) => {
         const starCountRef = firebase.database().ref('/encheres/');
-      // eslint-disable-next-line prefer-arrow/prefer-arrow-functions
-        starCountRef.on('value', function(snapshot) {
+        // eslint-disable-next-line prefer-arrow/prefer-arrow-functions
+        starCountRef.on('value', function (snapshot) {
           resolve(snapshot.val());
         });
       }
