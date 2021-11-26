@@ -38,7 +38,7 @@ export class FirebaseService {
         nomBien: ench.nomBien,
         description: ench.description,
         prix: ench.prix,
-        dateCreation: date.getDate()+'/'+(date.getMonth()+1)+'/'+date.getFullYear(),
+        dateCreation: date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear(),
         createur: currentUser.uid
       };
       const ref = firebase.database().ref('/encheres/');
