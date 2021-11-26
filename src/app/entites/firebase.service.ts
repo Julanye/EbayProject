@@ -33,16 +33,17 @@ export class FirebaseService {
     });
   }
    */
-  async createEncheres(ench) {
-    console.log(this.db.database.ref());
+  createEncheres(ench) {
     console.log(ench.nomBien, ench.description, ench.prix);
-    return new Promise<any>(async (resolve, reject) => {
+    return new Promise<any>((resolve, reject) => {
       const postData = {
         nomBien: ench.nomBien,
         description: ench.description,
         prix: ench.prix
       };
-      await this.db.object('enchere').set(postData);
+      const ref = firebase.database().ref('/encheres/');
+      ref.push(postData);
+      console.log(postData);
     });
   }
 
