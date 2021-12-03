@@ -9,6 +9,7 @@ export class FirebaseService {
 
   encheresListRef: AngularFireList<any>;
   encheresRef: AngularFireObject<any>;
+  mailEncherisseur: string;
 
   constructor(private db: AngularFireDatabase) {
   }
@@ -49,7 +50,7 @@ export class FirebaseService {
   // récupérer une enchère
   getEncherisseur(idEnchere) {
     return new Promise<any>((resolve, reject) => {
-      const starCountRef = firebase.database().ref('/encheres/encherisseurs/');
+      const starCountRef = firebase.database().ref('/encheres/'+idEnchere+'/encherisseurs/');
       starCountRef.on('value', snapshot => {
         resolve(snapshot.val());
       });
@@ -57,14 +58,13 @@ export class FirebaseService {
   }
 
   // Créer une livraison
-  createLivraison(liv) {
-    const encherisseur = this.getEncherisseur();
+  createLivraison(liv, idEnchere, encherisseur) {
     return new Promise<any>((resolve, reject) => {
       const currentUser = firebase.auth().currentUser;
       const postData = {
         date: liv.date,
         lieu: liv.lieu,
-        mailAch: encherisseur.
+        mailAch: encherisseur
       };
       const ref = firebase.database().ref('/encheres/livraison/');
       ref.push(postData);

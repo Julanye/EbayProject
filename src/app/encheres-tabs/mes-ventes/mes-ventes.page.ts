@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {FirebaseService} from '../../entites/firebase.service';
 
 @Component({
   selector: 'app-mes-ventes',
@@ -6,17 +7,18 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./mes-ventes.page.scss'],
 })
 export class MesVentesPage implements OnInit {
-  encheresList=[
-    {
-      enchereNom:'Maillot KCorp signé Rekkles',
-      enchereDescription:'Maillot signé par le plus grand joueur de LoL EUW de tous les temps, Martin Rekkles Larsson.',
-      encherePrix:'1 000 000€'
-    }
-  ];
+  email: string;
 
-  constructor() { }
+  constructor(private firebaseService: FirebaseService) { }
 
   ngOnInit() {
+  }
+
+  gererLivraison(liv, idEnchere){
+    this.firebaseService.getEncherisseur(idEnchere).then(function(infos) {
+      this.email = infos.mail;
+    });
+    this.firebaseService.createLivraison(liv, idEnchere, this.email);
   }
 
 }
