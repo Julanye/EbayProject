@@ -1,6 +1,8 @@
 import {Injectable} from '@angular/core';
 import {AngularFireDatabase, AngularFireList, AngularFireObject} from '@angular/fire/database';
 import * as firebase from 'firebase';
+import {collection} from 'rxfire/firestore';
+
 
 @Injectable({
   providedIn: 'root'
@@ -40,7 +42,7 @@ export class FirebaseService {
       const postData = {
         mail: currentUser.email,
         prixEnchere: encheri.prixEnchere,
-        idEnchere:  idEnchere
+        //idEnchere:  idEnchere
       };
       const ref = firebase.database().ref('/encheres/encherisseurs/');
       ref.push(postData);
@@ -83,11 +85,29 @@ export class FirebaseService {
     return new Promise<any>((resolve, reject) => {
         const starCountRef = firebase.database().ref('/encheres/');
         // eslint-disable-next-line prefer-arrow/prefer-arrow-functions
-        starCountRef.on('value', function (snapshot) {
+        starCountRef.on('value', function(snapshot) {
           resolve(snapshot.val());
         });
       }
     );
   }
+
+  // récupérer liste d'enchères de l'utilisateur connecté
+  getMyEncheresList() {
+    const currentUser = firebase.auth().currentUser;
+    const encheresRef = collection(this.db, 'encheres');
+    const q = query(encheresRef, where('create', '==', currentUser.uid));
+    return new Promise<any>((resolve, reject) => {
+
+        const starCountRef = firebase.database().ref('/encheres/'+currentUser.uid);
+        // eslint-disable-next-line prefer-arrow/prefer-arrow-functions
+        starCountRef.on('value', function(snapshot) {
+          resolve(snapshot.val());
+        });
+      }
+    );
+  }
+
+
 
 }

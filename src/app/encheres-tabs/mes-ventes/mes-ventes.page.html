@@ -1,10 +1,10 @@
 <ion-content>
-  <ion-card *ngFor="let enchere of encheresList">
+  <ion-card *ngFor="let enchere of myencheresList">
     <ion-icon name='bag-handle'></ion-icon>
-    <ion-card-title>{{enchere.enchereNom}}</ion-card-title>
-    <ion-card-subtitle>{{enchere.enchereDescription}}</ion-card-subtitle>
+    <ion-card-title>{{enchere.nomBien}}</ion-card-title>
+    <ion-card-subtitle>{{enchere.description}}</ion-card-subtitle>
     <ion-item>
-      <ion-card-content>{{enchere.encherePrix}}</ion-card-content>
+      <ion-card-content>{{enchere.prix}}</ion-card-content>
     </ion-item>
     <ion-item>
       <ion-button fill="outline">5:00</ion-button>
