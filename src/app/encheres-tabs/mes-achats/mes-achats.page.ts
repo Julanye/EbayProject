@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {FirebaseService} from '../../entites/firebase.service';
 
 @Component({
   selector: 'app-mes-achats',
@@ -6,22 +7,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./mes-achats.page.scss'],
 })
 export class MesAchatsPage implements OnInit {
-  encheresList=[
-    {
-      enchereNom:'Ballon signé Ronaldo',
-      enchereDescription:'Ballon signé par le plus grand joueur de foot de tous les temps, Cristiano Ronaldo',
-      encherePrix:'5 000€'
-    },
-    {
-      enchereNom:'Maillot T1 signé Faker',
-      enchereDescription:'Ballon signé par le plus grand joueur de LoL de tous les temps, Lee Faker Sang-Hyeok',
-      encherePrix:'1 000 000€'
-    }
-  ];
+  public myAchatsList: Array<{id: string; nomBien: string; description: string; prix: string}> = [];
 
-  constructor() { }
+  constructor(private firebaseService: FirebaseService) { }
 
   ngOnInit() {
+    this.myAchatsList = this.firebaseService.getMyAchatsList();
   }
 
 }

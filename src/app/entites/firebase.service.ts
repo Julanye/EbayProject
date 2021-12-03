@@ -1,7 +1,6 @@
 import {Injectable} from '@angular/core';
 import {AngularFireDatabase, AngularFireList, AngularFireObject} from '@angular/fire/database';
 import * as firebase from 'firebase';
-import {collection} from 'rxfire/firestore';
 
 
 @Injectable({
@@ -11,6 +10,8 @@ export class FirebaseService {
 
   encheresListRef: AngularFireList<any>;
   encheresRef: AngularFireObject<any>;
+  myEncheresList: Array<{ id: string; nomBien: string; description: string; prix: string }> = [];
+  myAchatsList: Array<{ id: string; nomBien: string; description: string; prix: string }> = [];
   mailEncherisseur: string;
 
   constructor(private db: AngularFireDatabase) {
@@ -52,7 +53,7 @@ export class FirebaseService {
   // récupérer une enchère
   getEncherisseur(idEnchere) {
     return new Promise<any>((resolve, reject) => {
-      const starCountRef = firebase.database().ref('/encheres/'+idEnchere+'/encherisseurs/');
+      const starCountRef = firebase.database().ref('/encheres/' + idEnchere + '/encherisseurs/');
       starCountRef.on('value', snapshot => {
         resolve(snapshot.val());
       });
@@ -73,19 +74,22 @@ export class FirebaseService {
     });
   }
 
-  // récupérer une enchère
-  getEncheres(id: number) {
-    this.encheresRef = this.db.object('/encheres/' + id);
-    return this.encheresRef;
+  // récupérer une enchère grâce à son id
+  //TODO : ça n'a pas l'air de fonctionner, to fix
+  getEnchere(idEnchere: string) {
+    return new Promise<any>((resolve, reject) => {
+      const starCountRef = firebase.database().ref('/encheres/' + idEnchere);
+      starCountRef.on('value', snapshot => {
+        resolve(snapshot.val());
+      });
+    });
   }
-
 
   // récupérer liste d'enchères
   getEncheresList() {
     return new Promise<any>((resolve, reject) => {
         const starCountRef = firebase.database().ref('/encheres/');
-        // eslint-disable-next-line prefer-arrow/prefer-arrow-functions
-        starCountRef.on('value', function(snapshot) {
+        starCountRef.on('value', snapshot => {
           resolve(snapshot.val());
         });
       }
@@ -95,19 +99,25 @@ export class FirebaseService {
   // récupérer liste d'enchères de l'utilisateur connecté
   getMyEncheresList() {
     const currentUser = firebase.auth().currentUser;
-    const encheresRef = collection(this.db, 'encheres');
-    const q = query(encheresRef, where('create', '==', currentUser.uid));
-    return new Promise<any>((resolve, reject) => {
-
-        const starCountRef = firebase.database().ref('/encheres/'+currentUser.uid);
-        // eslint-disable-next-line prefer-arrow/prefer-arrow-functions
-        starCountRef.on('value', function(snapshot) {
-          resolve(snapshot.val());
-        });
-      }
-    );
+    const query = firebase.database().ref('/encheres/')
+      .orderByChild('createur')
+      .equalTo(currentUser.uid)
+      .on('child_added', snapshot => {
+        this.myEncheresList.push(snapshot.val());
+      });
+    return this.myEncheresList;
   }
 
-
+  // récupérer liste d'enchères de l'utilisateur connecté
+  getMyAchatsList() {
+    const currentUser = firebase.auth().currentUser;
+    const query = firebase.database().ref('/encheres/')
+      .orderByChild('acheteur')
+      .equalTo(currentUser.uid)
+      .on('child_added', snapshot => {
+        this.myAchatsList.push(snapshot.val());
+      });
+    return this.myAchatsList;
+  }
 
 }
