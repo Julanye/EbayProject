@@ -32,28 +32,41 @@ export class FirebaseService {
     });
   }
 
-  // Créer un encherisseur
-  createEncherisseurs(encheri) {
+  // update car on vient remplacer l'ancien enchérisseur lorsque le prix est supérieur
+  updateEncherisseurs(encheri, idEnchere) {
     return new Promise<any>((resolve, reject) => {
       const currentUser = firebase.auth().currentUser;
       const postData = {
         mail: currentUser.email,
         prixEnchere: encheri.prixEnchere,
+        idEnchere:  idEnchere
       };
-      const ref = firebase.database().ref('/encherisseurs/');
+      const ref = firebase.database().ref('/encheres/encherisseurs/');
       ref.push(postData);
+    });
+  }
+
+  // récupérer une enchère
+  getEncherisseur(idEnchere) {
+    return new Promise<any>((resolve, reject) => {
+      const starCountRef = firebase.database().ref('/encheres/encherisseurs/');
+      starCountRef.on('value', snapshot => {
+        resolve(snapshot.val());
+      });
     });
   }
 
   // Créer une livraison
   createLivraison(liv) {
+    const encherisseur = this.getEncherisseur();
     return new Promise<any>((resolve, reject) => {
+      const currentUser = firebase.auth().currentUser;
       const postData = {
         date: liv.date,
         lieu: liv.lieu,
-        mailAch: /*Récupérer le mail du dernier encherisseur */,
+        mailAch: encherisseur.
       };
-      const ref = firebase.database().ref('/livraison/');
+      const ref = firebase.database().ref('/encheres/livraison/');
       ref.push(postData);
     });
   }
