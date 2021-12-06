@@ -120,4 +120,18 @@ export class FirebaseService {
     return this.myAchatsList;
   }
 
+  /**
+   * Récupérer les informations d'un utilisateur précis
+   */
+  getUserInformation() {
+    const currentUser = firebase.auth().currentUser;
+    return new Promise<any>((resolve, reject) => {
+      const starCountRef = firebase.database().ref('/utilisateur/' + currentUser.uid);
+      starCountRef.on('value', snapshot => {
+        resolve(snapshot.val());
+      });
+    });
+  }
+
+
 }

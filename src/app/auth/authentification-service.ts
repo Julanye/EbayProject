@@ -72,7 +72,7 @@ export class AuthenticationService {
     console.log(postData);
     this.ngFireAuth.user.subscribe(currentUser => {
       const updates = {};
-      updates['/users/' + currentUser.uid] = postData;
+      updates['/utilisateur/' + currentUser.uid] = postData;
       firebase.database().ref().update(updates);
     });
   }
