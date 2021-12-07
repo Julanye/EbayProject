@@ -52,7 +52,6 @@ export class AuthenticationService {
           this.sendVerificationMail()
             .then(r => {
               that.createUser(value);
-              this.router.navigate(['/verification-email']);
             });
         });
     });
@@ -81,11 +80,10 @@ export class AuthenticationService {
    * Envoie d'un mail de vérification lors de l'inscription d'un utilisateur
    */
   sendVerificationMail() {
-    console.log('Here');
     return this.ngFireAuth.auth.currentUser.sendEmailVerification()
       .then(() => {
-        console.log('here 2');
-        this.router.navigate(['verification-email']);
+
+        this.router.navigate(['/verification-email']);
       });
   }
 
@@ -104,7 +102,7 @@ export class AuthenticationService {
   signOut() {
     return this.ngFireAuth.auth.signOut().then(() => {
       localStorage.removeItem('user');
-      this.router.navigate(['login']);
+      this.router.navigate(['/connexion']);
     });
   }
 

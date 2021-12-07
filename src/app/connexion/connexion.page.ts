@@ -46,7 +46,8 @@ export class ConnexionPage implements OnInit {
     this.authService.signIn(email.value, password.value)
       .then((res) => {
         if(this.authService.isEmailVerified) {
-          this.router.navigate(['encheres']);
+          this.validationsForm.reset();
+          this.router.navigate(['/encheres']);
         } else {
           window.alert('Email is not verified');
           return false;
