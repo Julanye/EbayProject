@@ -8,7 +8,7 @@
 </ion-header>
 <ion-content>
   <div class="padding">
-    <div class="logo">
+    <div class="logo" align="center">
       <!--TODO Gérer l'importation d'images-->
       <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
     </div>
@@ -18,7 +18,7 @@
     </ion-item>
     <ion-item>
       <ion-label position="stacked">Description du bien</ion-label>
-      <ion-input disabled="true">Maillot signé par le plus grand joueur de LoL tous les temps</ion-input>
+      <ion-input disabled="true">Maillot signé par le plus grand joueur de LoL</ion-input>
     </ion-item>
     <ion-item>
       <ion-label position="stacked">Prix plancher (€)</ion-label>
@@ -26,6 +26,8 @@
       <ion-input type="number" value="5" min="1"></ion-input>
     </ion-item>
   </div>
+  <br>
+  <br>
   <div align="center">
     <ion-button (click)="$event">Enchérir</ion-button>
   </div>

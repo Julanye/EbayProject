@@ -31,8 +31,6 @@ export class FirebaseService {
       };
       const ref = firebase.database().ref('/encheres/');
       ref.push(postData);
-      console.log(ench.nomBien, ench.description, ench.prix, ench.dateCreation, currentUser);
-      console.log(postData);
     });
   }
 
@@ -118,6 +116,19 @@ export class FirebaseService {
         this.myAchatsList.push(snapshot.val());
       });
     return this.myAchatsList;
+  }
+
+  createUser(user) {
+    return new Promise<any>((resolve, reject) => {
+      const postData = {
+        mailUser: user.mail,
+        nomUser: user.nom,
+        prenomUser: user.prenom,
+        adresseUser: user.adresse
+      };
+      const ref = firebase.database().ref('/utilisateur/');
+      ref.push(postData);
+    });
   }
 
   /**

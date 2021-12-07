@@ -1,9 +1,7 @@
-import { Injectable, NgZone } from '@angular/core';
-import { auth } from 'firebase/app';
-import { User } from './user';
-import { Router } from '@angular/router';
-import { AngularFireAuth } from '@angular/fire/auth';
-import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
+import {Injectable, NgZone} from '@angular/core';
+import {Router} from '@angular/router';
+import {AngularFireAuth} from '@angular/fire/auth';
+import {AngularFirestore} from '@angular/fire/firestore';
 import * as firebase from 'firebase';
 
 @Injectable({
@@ -47,11 +45,10 @@ export class AuthenticationService {
    * @param value valeurs du formulaire d'inscription
    */
   registerUser(value) {
-    console.log(value);
     const that = this;
     return new Promise<any>((resolve, reject) => {
       firebase.auth().createUserWithEmailAndPassword(value.mail, value.mdp)
-        .then(function(user) {
+        .then(() => {
           that.createUser(value);
         });
     });
@@ -69,7 +66,6 @@ export class AuthenticationService {
       email: value.mail,
       adresse: value.adresse
     };
-    console.log(postData);
     this.ngFireAuth.user.subscribe(currentUser => {
       const updates = {};
       updates['/utilisateur/' + currentUser.uid] = postData;
@@ -81,8 +77,10 @@ export class AuthenticationService {
    * Envoie d'un mail de vérification lors de l'inscription d'un utilisateur
    */
   sendVerificationMail() {
+    console.log('Here');
     return this.ngFireAuth.auth.currentUser.sendEmailVerification()
       .then(() => {
+        console.log('here 2');
         this.router.navigate(['verification-email']);
       });
   }

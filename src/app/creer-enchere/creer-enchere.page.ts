@@ -34,7 +34,6 @@ export class CreerEncherePage implements OnInit {
       return false;
     } else {
       this.fireService.createEncheres(this.creerEnchereForm.value).then(res => {
-        console.log(res);
         this.creerEnchereForm.reset();
         this.router.navigate(['/encheres']);
       })

@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
-import { Router } from '@angular/router';
-import { AuthenticationService } from '../auth/authentification-service';
+import {Router} from '@angular/router';
+import {AuthenticationService} from '../auth/authentification-service';
+import {FirebaseService} from '../entites/firebase.service';
 
 @Component({
   selector: 'app-inscription',
@@ -22,10 +23,12 @@ export class InscriptionPage implements OnInit {
       {type: 'minlength', message: 'Le mot de passe doit faire au moins 5 caractères.'}
     ]
   };
+
   constructor(
     private formBuilder: FormBuilder,
     public authService: AuthenticationService,
-    public router: Router
+    public router: Router,
+    public firebaseService: FirebaseService
   ) {
 
   }
@@ -52,11 +55,14 @@ export class InscriptionPage implements OnInit {
     });
   }
 
-  signUp(value){
+  signUp(value) {
     this.authService.registerUser(value)
-      .then((res) => {
-        this.authService.sendVerificationMail();
-        this.router.navigate(['/verification-email']);
+      .then(() => {
+        this.authService.sendVerificationMail()
+          .then(r => {
+            this.validationsForm.reset();
+            this.router.navigate(['/verification-email']);
+          });
       }).catch((error) => {
       window.alert(error.message);
     });
