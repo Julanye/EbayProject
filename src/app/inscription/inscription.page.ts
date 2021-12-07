@@ -58,11 +58,7 @@ export class InscriptionPage implements OnInit {
   signUp(value) {
     this.authService.registerUser(value)
       .then(() => {
-        this.authService.sendVerificationMail()
-          .then(r => {
-            this.validationsForm.reset();
-            this.router.navigate(['/verification-email']);
-          });
+        this.validationsForm.reset();
       }).catch((error) => {
       window.alert(error.message);
     });

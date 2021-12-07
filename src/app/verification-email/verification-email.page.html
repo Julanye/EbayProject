@@ -14,14 +14,14 @@
       <p>
         Un mail vous a été envoyé pour vérifier votre adresse mail.
         <br>
-        Clickez sur le lien dans le mail pour activer votre compte.
+        Cliquez sur le lien dans le mail pour activer votre compte.
       </p>
     </ion-row>
     <ion-button type="submit" (click)="authService.sendVerificationMail()" expand="block" shape="round">
       <ion-icon name="paper-plane-outline"> </ion-icon>
       Renvoyez l'email de vérification
     </ion-button>
-    <ion-button (click)="authService.sendVerificationMail()" expand="block" shape="round" routerLink="/connexion" color="light">
+    <ion-button expand="block" shape="round" routerLink="/connexion" color="light">
       <ion-icon name="log-in-outline"></ion-icon>
       Connexion
     </ion-button>

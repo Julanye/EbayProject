@@ -118,19 +118,6 @@ export class FirebaseService {
     return this.myAchatsList;
   }
 
-  createUser(user) {
-    return new Promise<any>((resolve, reject) => {
-      const postData = {
-        mailUser: user.mail,
-        nomUser: user.nom,
-        prenomUser: user.prenom,
-        adresseUser: user.adresse
-      };
-      const ref = firebase.database().ref('/utilisateur/');
-      ref.push(postData);
-    });
-  }
-
   /**
    * Récupérer les informations d'un utilisateur précis
    */

@@ -49,7 +49,11 @@ export class AuthenticationService {
     return new Promise<any>((resolve, reject) => {
       firebase.auth().createUserWithEmailAndPassword(value.mail, value.mdp)
         .then(() => {
-          that.createUser(value);
+          this.sendVerificationMail()
+            .then(r => {
+              that.createUser(value);
+              this.router.navigate(['/verification-email']);
+            });
         });
     });
   }
