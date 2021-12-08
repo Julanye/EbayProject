@@ -72,7 +72,6 @@ export class FirebaseService {
   }
 
   // récupérer une enchère grâce à son id
-  //TODO : ça n'a pas l'air de fonctionner, to fix
   getEnchere(idEnchere: string) {
     return new Promise<any>((resolve, reject) => {
       const starCountRef = firebase.database().ref('/encheres/' + idEnchere);

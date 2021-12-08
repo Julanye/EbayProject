@@ -28,7 +28,7 @@ const routes: Routes = [
     loadChildren: () => import('./mes-encheres/mes-encheres.module').then( m => m.MesEncheresPageModule)
   },
   {
-    path: 'une-enchere',
+    path: 'une-enchere/:id',
     loadChildren: () => import('./une-enchere/une-enchere.module').then( m => m.UneEncherePageModule)
   },
   {

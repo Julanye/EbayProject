@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {FirebaseService} from '../entites/firebase.service';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-une-enchere',
@@ -6,10 +8,23 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./une-enchere.page.scss'],
 })
 export class UneEncherePage implements OnInit {
+  id: string;
+  nomBien: string;
+  description: string;
+  prixEnchere: number;
 
-  constructor() { }
+  constructor(private firebaseService: FirebaseService,
+              private activatedRoute: ActivatedRoute) {
 
-  ngOnInit() {
   }
 
+  ngOnInit() {
+    const data = this.activatedRoute.snapshot.params.id;
+    this.firebaseService.getEnchere(data).then(value => {
+      this.id = data;
+      this.nomBien = value.nomBien;
+      this.description = value.description;
+      this.prixEnchere = value.prix;
+    });
+  }
 }

@@ -3,7 +3,10 @@
     <ion-button fill="clear" slot="start">
       <ion-menu-button color="dark" menu="main-menu"></ion-menu-button>
     </ion-button>
-    <ion-title size="large">EnchereID</ion-title>
+    <ion-title size="large">{{nomBien}}</ion-title>
+    <ion-buttons slot="end">
+      <ion-back-button icon="close-outline" default-href="/encheres"></ion-back-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 <ion-content>
@@ -14,22 +17,21 @@
     </div>
     <ion-item>
       <ion-label position="stacked">Nom du bien</ion-label>
-      <ion-input disabled="true">Maillot signé par Faker</ion-input>
+      <ion-input disabled="true">{{nomBien}}</ion-input>
     </ion-item>
     <ion-item>
       <ion-label position="stacked">Description du bien</ion-label>
-      <ion-input disabled="true">Maillot signé par le plus grand joueur de LoL</ion-input>
+      <ion-input disabled="true">{{description}}</ion-input>
     </ion-item>
     <ion-item>
       <ion-label position="stacked">Prix plancher (€)</ion-label>
-      <!-- value="{{enchere.prix}}" min="{{enchere.prix}}"-->
-      <ion-input type="number" value="5" min="1"></ion-input>
+      <ion-input type="number" value="{{prixEnchere}}" min="{{prixEnchere}}"></ion-input>
     </ion-item>
   </div>
   <br>
   <br>
   <div align="center">
-    <ion-button (click)="$event">Enchérir</ion-button>
+    <ion-button>Enchérir</ion-button>
   </div>
 </ion-content>
 

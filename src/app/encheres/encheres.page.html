@@ -7,14 +7,14 @@
   </ion-toolbar>
 </ion-header>
 <ion-content>
-<ion-card *ngFor="let enchere of encheresList">
+<ion-card button="true" *ngFor="let enchere of encheresList">
   <ion-icon name='bag-handle'></ion-icon>
   <ion-card-title>{{enchere.nomBien}}</ion-card-title>
   <ion-card-subtitle>{{enchere.description}}</ion-card-subtitle>
   <ion-item>
     <ion-card-content>{{enchere.prix}}</ion-card-content>
     <ion-button disabled="true" fill="outline">{{transform(timeLeft)}}</ion-button>
-    <ion-button routerLink="/une-enchere">Enchérir</ion-button>
+    <ion-button routerLink="/une-enchere/{{enchere.id}}">Enchérir</ion-button>
   </ion-item>
 </ion-card>
 </ion-content>
