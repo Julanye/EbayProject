@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FirebaseService} from '../../entites/firebase.service';
 
 @Component({
@@ -7,11 +7,13 @@ import {FirebaseService} from '../../entites/firebase.service';
   styleUrls: ['./mes-achats.page.scss'],
 })
 export class MesAchatsPage implements OnInit {
-  public myAchatsList: Array<{id: string; nomBien: string; description: string; prix: string}> = [];
+  public myAchatsList: Array<{ id: string; nomBien: string; description: string; prix: string }> = [];
 
-  constructor(private firebaseService: FirebaseService) { }
+  constructor(private firebaseService: FirebaseService) {
+  }
 
   ngOnInit() {
+    this.myAchatsList = [];
     this.myAchatsList = this.firebaseService.getMyAchatsList();
   }
 

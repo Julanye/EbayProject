@@ -14,6 +14,7 @@ export class MesVentesPage implements OnInit {
   }
 
   ngOnInit() {
+    this.myencheresList = [] ;
     this.myencheresList = this.firebaseService.getMyEncheresList();
   }
 

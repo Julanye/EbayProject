@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {FirebaseService} from '../entites/firebase.service';
+import * as firebase from 'firebase';
 
 @Component({
   selector: 'app-encheres',
@@ -10,6 +11,7 @@ export class EncheresPage implements OnInit {
   public encheresList: Array<{ id: string; nomBien: string; description: string; prix: string }> = [];
   timeLeft = 300;
   interval;
+
   constructor(private firebaseService: FirebaseService) {
   }
 
@@ -19,12 +21,12 @@ export class EncheresPage implements OnInit {
 
   startTimer() {
     this.interval = setInterval(() => {
-      if(this.timeLeft > 0) {
+      if (this.timeLeft > 0) {
         this.timeLeft--;
       } else {
         this.timeLeft = 300;
       }
-    },1000);
+    }, 1000);
   }
 
   pauseTimer() {
@@ -37,15 +39,18 @@ export class EncheresPage implements OnInit {
   }
 
   initEncheresList(encheresList) {
+    const currentUser = firebase.auth().currentUser;
     this.firebaseService.getEncheresList().then(encheres => {
       for (const key of Object.keys(encheres)) {
         const enchere = encheres[key];
-        encheresList.push({
-          id: key,
-          nomBien: enchere.nomBien,
-          description: enchere.description,
-          prix: enchere.prix
-        });
+        if (currentUser.uid !== enchere.createur) {
+          encheresList.push({
+            id: key,
+            nomBien: enchere.nomBien,
+            description: enchere.description,
+            prix: enchere.prix
+          });
+        }
       }
     });
   }
