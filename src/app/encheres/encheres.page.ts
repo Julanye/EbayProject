@@ -37,7 +37,7 @@ export class EncheresPage implements OnInit {
   }
 
   initEncheresList(encheresList) {
-    this.firebaseService.getEncheresList().then(encheres => { // Récupérer les lieux, regarder dans l'idUser.
+    this.firebaseService.getEncheresList().then(encheres => {
       for (const key of Object.keys(encheres)) {
         const enchere = encheres[key];
         encheresList.push({

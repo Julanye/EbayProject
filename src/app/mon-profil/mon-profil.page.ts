@@ -17,14 +17,13 @@ export class MonProfilPage implements OnInit {
   adresse;
 
   constructor(private fireService: FirebaseService) {
-      //this.initField(); //Ce qui pose pb
   }
 
   /**
    * Récupération et affichage des informations de l'utilisateur
    */
-  initField() {
-    this.fireService.getUserInformation().then(function(value) {
+  initUser() {
+    this.fireService.getUserInformation().then(value => {
       this.mail = value.email;
       this.nom = value.nom;
       this.prenom = value.prenom;
@@ -33,6 +32,7 @@ export class MonProfilPage implements OnInit {
   }
 
   ngOnInit() {
+    this.initUser();
   }
 
 }

@@ -8,7 +8,6 @@ import * as firebase from 'firebase';
 })
 export class FirebaseService {
 
-  encheresListRef: AngularFireList<any>;
   encheresRef: AngularFireObject<any>;
   myEncheresList: Array<{ id: string; nomBien: string; description: string; prix: string }> = [];
   myAchatsList: Array<{ id: string; nomBien: string; description: string; prix: string }> = [];
@@ -35,13 +34,13 @@ export class FirebaseService {
   }
 
   // update car on vient remplacer l'ancien enchérisseur lorsque le prix est supérieur
-  updateEncherisseurs(encheri, idEnchere) {
+  updateEncherisseurs(encheri, idEnch) {
     return new Promise<any>((resolve, reject) => {
       const currentUser = firebase.auth().currentUser;
       const postData = {
         mail: currentUser.email,
         prixEnchere: encheri.prixEnchere,
-        //idEnchere:  idEnchere
+        idEnchere: idEnch
       };
       const ref = firebase.database().ref('/encheres/encherisseurs/');
       ref.push(postData);
