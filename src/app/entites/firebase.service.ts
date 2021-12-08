@@ -95,12 +95,12 @@ export class FirebaseService {
   // récupérer liste d'enchères de l'utilisateur connecté
   getMyEncheresList() {
     const currentUser = firebase.auth().currentUser;
+    this.myEncheresList = [];
     const query = firebase.database().ref('/encheres/')
       .orderByChild('createur')
       .equalTo(currentUser.uid)
       .on('child_added', snapshot => {
         //OUI c'est très MOCHE, mais je m'y attarderai plus tard, un peu de pitié :(
-        this.myEncheresList = [];
         this.myEncheresList.push(snapshot.val());
       });
     return this.myEncheresList;
@@ -109,11 +109,11 @@ export class FirebaseService {
   // récupérer liste d'enchères de l'utilisateur connecté
   getMyAchatsList() {
     const currentUser = firebase.auth().currentUser;
+    this.myAchatsList = [];
     const query = firebase.database().ref('/encheres/')
       .orderByChild('acheteur')
       .equalTo(currentUser.uid)
       .on('child_added', snapshot => {
-        this.myAchatsList = [];
         this.myAchatsList.push(snapshot.val());
       });
     return this.myAchatsList;
