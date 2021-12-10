@@ -95,13 +95,14 @@ export class FirebaseService {
   // récupérer liste d'enchères de l'utilisateur connecté
   getMyEncheresList() {
     const currentUser = firebase.auth().currentUser;
+    //OUI le reset de la liste est très MOCHE, mais je m'y attarderai plus tard, un peu de pitié :(
     this.myEncheresList = [];
-    const query = firebase.database().ref('/encheres/')
+    firebase.database().ref('/encheres/')
       .orderByChild('createur')
       .equalTo(currentUser.uid)
       .on('child_added', snapshot => {
-        //OUI c'est très MOCHE, mais je m'y attarderai plus tard, un peu de pitié :(
-        this.myEncheresList.push(snapshot.val());
+        this.myEncheresList.push({description: snapshot.val().description,
+          id: snapshot.key, nomBien: snapshot.val().nomBien, prix: snapshot.val().prix });
       });
     return this.myEncheresList;
   }
@@ -110,7 +111,7 @@ export class FirebaseService {
   getMyAchatsList() {
     const currentUser = firebase.auth().currentUser;
     this.myAchatsList = [];
-    const query = firebase.database().ref('/encheres/')
+    firebase.database().ref('/encheres')
       .orderByChild('acheteur')
       .equalTo(currentUser.uid)
       .on('child_added', snapshot => {

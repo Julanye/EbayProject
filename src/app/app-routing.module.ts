@@ -42,7 +42,12 @@ const routes: Routes = [
   {
     path: 'verification-email',
     loadChildren: () => import('./verification-email/verification-email.module').then(m => m.VerificationEmailPageModule)
+  },
+  {
+    path: 'livraison/:id',
+    loadChildren: () => import('./livraison/livraison.module').then( m => m.LivraisonPageModule)
   }
+
 
 ];
 

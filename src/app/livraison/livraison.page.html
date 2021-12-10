@@ -1,0 +1,50 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-button fill="clear" slot="start">
+      <ion-menu-button color="dark" menu="main-menu"></ion-menu-button>
+    </ion-button>
+    <ion-title size="large">Livraison</ion-title>
+    <ion-buttons slot="end">
+      <ion-back-button icon="close-outline" default-href="/mes-encheres"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <div class="padding">
+    <div class="logo" align="center">
+      <!--TODO Gérer l'importation d'images-->
+      <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
+    </div>
+    <ion-item>
+      <ion-label position="stacked">Nom du bien</ion-label>
+      <br>
+      <ion-input disabled="true">{{nomBien}}</ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked">Description du bien</ion-label>
+      <br>
+      <ion-input disabled="true">{{description}}</ion-input>
+      <br>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked">Prix plancher (€)</ion-label>
+      <br>
+      <ion-input disabled="true">{{prixEnchere}}</ion-input>
+      <br>
+    </ion-item>
+  </div>
+  <div>
+    <ion-item>
+      <ion-label position="stacked">Date</ion-label>
+      <ion-datetime max="2099-10-31" displayFormat="DD-MMM-YYYY"></ion-datetime>
+    </ion-item>
+  </div>
+  <br>
+  <br>
+  <div align="center">
+    <ion-button>Fixer la date de livraison</ion-button>
+  </div>
+</ion-content>
+
+
+
