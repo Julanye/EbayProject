@@ -19,6 +19,9 @@ export class EncheresPage implements OnInit {
     this.initEncheresList(this.encheresList);
   }
 
+  /**
+   * Lance le chronomètre
+   */
   startTimer() {
     this.interval = setInterval(() => {
       if (this.timeLeft > 0) {
@@ -38,6 +41,11 @@ export class EncheresPage implements OnInit {
     return minutes + ':' + (value - minutes * 60);
   }
 
+  /**
+   * Récupère la liste d'enchères depuis la base de données
+   *
+   * @param encheresList la variable permettant de stocker la liste des enchères récupérées
+   */
   initEncheresList(encheresList) {
     const currentUser = firebase.auth().currentUser;
     this.firebaseService.getEncheresList().then(encheres => {

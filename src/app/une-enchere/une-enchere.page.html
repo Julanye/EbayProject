@@ -25,13 +25,13 @@
     </ion-item>
     <ion-item>
       <ion-label position="stacked">Prix plancher (€)</ion-label>
-      <ion-input type="number" value="{{prixEnchere}}" min="{{prixEnchere}}"></ion-input>
+      <ion-input type="number" [(ngModel)]="price" value="{{prixEnchere}}" min="{{prixEnchere}}"></ion-input>
     </ion-item>
   </div>
   <br>
   <br>
   <div align="center">
-    <ion-button>Enchérir</ion-button>
+    <ion-button (click)="encherir()">Enchérir</ion-button>
   </div>
 </ion-content>
 

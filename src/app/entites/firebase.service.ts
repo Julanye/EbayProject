@@ -16,7 +16,11 @@ export class FirebaseService {
   constructor(private db: AngularFireDatabase) {
   }
 
-  // Creer une enchère
+  /**
+   * Creer une enchère
+   *
+   * @param ench l'enchère à créer
+   */
   createEncheres(ench) {
     return new Promise<any>((resolve, reject) => {
       const currentUser = firebase.auth().currentUser;
@@ -33,21 +37,40 @@ export class FirebaseService {
     });
   }
 
-  // update car on vient remplacer l'ancien enchérisseur lorsque le prix est supérieur
-  updateEncherisseurs(encheri, idEnch) {
-    return new Promise<any>((resolve, reject) => {
-      const currentUser = firebase.auth().currentUser;
-      const postData = {
-        mail: currentUser.email,
-        prixEnchere: encheri.prixEnchere,
-        idEnchere: idEnch
-      };
-      const ref = firebase.database().ref('/encheres/encherisseurs/');
-      ref.push(postData);
+  /**
+   * Met à jour le prix d'une enchère et les informations de l'encherisseur
+   *
+   * @param prixEnch le nouveau prix de l'enchère
+   * @param idEnchere l'id de l'enchère à mettre à jour
+   */
+  updateEnchere(prixEnch, idEnchere){
+    const starCountRef = firebase.database().ref('/encheres/' + idEnchere);
+    starCountRef.update({
+      prix: prixEnch
     });
+    this.updateEncherisseurs(prixEnch, idEnchere);
   }
 
-  // récupérer une enchère
+  /**
+   * Met à jour l'encherisseur d'une enchère
+   *
+   * @param prixEnch le nouveau prix de l'enchère
+   * @param idEnchere l'id de l'enchère mise à jour
+   */
+  updateEncherisseurs(prixEnch, idEnchere) {
+      const currentUser = firebase.auth().currentUser;
+      const starCountRef = firebase.database().ref('/encheres/encherisseurs/'+idEnchere);
+      starCountRef.update({
+        prix: prixEnch,
+        idEncherisseur: currentUser.uid
+      });
+  }
+
+  /**
+   * Récupérer une enchère
+   *
+   * @param idEnchere l'id de l'enchère
+   */
   getEncherisseur(idEnchere) {
     return new Promise<any>((resolve, reject) => {
       const starCountRef = firebase.database().ref('/encheres/' + idEnchere + '/encherisseurs/');
@@ -57,7 +80,13 @@ export class FirebaseService {
     });
   }
 
-  // Créer une livraison
+  /**
+   * Créer une livraison
+   *
+   * @param liv la livraison à créer
+   * @param idEnchere l'id de l'enchère à livrer
+   * @param encherisseur l'encherisseur à qui la livraison doit être livrée
+   */
   createLivraison(liv, idEnchere, encherisseur) {
     return new Promise<any>((resolve, reject) => {
       const currentUser = firebase.auth().currentUser;
@@ -71,7 +100,11 @@ export class FirebaseService {
     });
   }
 
-  // récupérer une enchère grâce à son id
+  /**
+   * Récupérer une enchère grâce à son id
+   *
+   * @param idEnchere l'id de l'enchère à récupérer
+   */
   getEnchere(idEnchere: string) {
     return new Promise<any>((resolve, reject) => {
       const starCountRef = firebase.database().ref('/encheres/' + idEnchere);
@@ -81,7 +114,9 @@ export class FirebaseService {
     });
   }
 
-  // récupérer liste d'enchères
+  /**
+   * Récupérer liste d'enchères
+   */
   getEncheresList() {
     return new Promise<any>((resolve, reject) => {
         const starCountRef = firebase.database().ref('/encheres/');
@@ -92,7 +127,9 @@ export class FirebaseService {
     );
   }
 
-  // récupérer liste d'enchères de l'utilisateur connecté
+  /**
+   * Récupérer liste d'enchères de l'utilisateur connecté
+   */
   getMyEncheresList() {
     const currentUser = firebase.auth().currentUser;
     //OUI le reset de la liste est très MOCHE, mais je m'y attarderai plus tard, un peu de pitié :(
@@ -107,7 +144,9 @@ export class FirebaseService {
     return this.myEncheresList;
   }
 
-  // récupérer liste d'enchères de l'utilisateur connecté
+  /**
+   * Récupérer liste d'enchères de l'utilisateur connecté
+   */
   getMyAchatsList() {
     const currentUser = firebase.auth().currentUser;
     this.myAchatsList = [];
