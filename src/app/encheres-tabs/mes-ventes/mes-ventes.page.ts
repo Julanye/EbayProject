@@ -17,11 +17,4 @@ export class MesVentesPage implements OnInit {
     this.myencheresList = [] ;
     this.myencheresList = this.firebaseService.getMyEncheresList();
   }
-
-  gererLivraison(liv, idEnchere) {
-    this.firebaseService.getEncherisseur(idEnchere).then(function(infos) {
-      this.email = infos.mail;
-    });
-    this.firebaseService.createLivraison(liv, idEnchere, this.email);
-  }
 }

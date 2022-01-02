@@ -36,13 +36,18 @@
   <div>
     <ion-item>
       <ion-label position="stacked">Date</ion-label>
-      <ion-datetime max="2099-10-31" displayFormat="DD-MMM-YYYY"></ion-datetime>
+      <ion-datetime [(ngModel)]="date" max="2099-10-31" displayFormat="DD-MMM-YYYY"></ion-datetime>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked">Lieu</ion-label>
+      <br>
+      <ion-input [(ngModel)]="lieu"></ion-input>
     </ion-item>
   </div>
   <br>
   <br>
   <div align="center">
-    <ion-button>Fixer la date de livraison</ion-button>
+    <ion-button (click)="gererLivraison(lieu, date, id)">Fixer la livraison</ion-button>
   </div>
 </ion-content>
 

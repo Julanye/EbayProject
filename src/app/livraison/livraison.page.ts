@@ -12,6 +12,9 @@ export class LivraisonPage implements OnInit {
   nomBien: string;
   description: string;
   prixEnchere: number;
+  lieu: string;
+  mailAcheteur: string;
+  date: Date;
 
   constructor(private firebaseService: FirebaseService,
               private activatedRoute: ActivatedRoute) {
@@ -26,5 +29,13 @@ export class LivraisonPage implements OnInit {
       this.description = value.description;
       this.prixEnchere = value.prix;
     });
+  }
+
+  gererLivraison(lieu, date: Date, id) {
+    console.log(id);
+    this.firebaseService.getEncherisseur(id).then(value => {
+      this.mailAcheteur = value.mail;
+    });
+    this.firebaseService.createLivraison(lieu, date, id, this.mailAcheteur);
   }
 }

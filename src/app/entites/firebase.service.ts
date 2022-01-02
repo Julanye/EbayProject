@@ -62,18 +62,19 @@ export class FirebaseService {
       const starCountRef = firebase.database().ref('/encheres/encherisseurs/'+idEnchere);
       starCountRef.update({
         prix: prixEnch,
-        idEncherisseur: currentUser.uid
+        idEncherisseur: currentUser.uid,
+        mailEnch: currentUser.email
       });
   }
 
   /**
-   * Récupérer une enchère
+   * Récupérer un encherisseur
    *
    * @param idEnchere l'id de l'enchère
    */
   getEncherisseur(idEnchere) {
     return new Promise<any>((resolve, reject) => {
-      const starCountRef = firebase.database().ref('/encheres/' + idEnchere + '/encherisseurs/');
+      const starCountRef = firebase.database().ref('/encheres/encherisseurs/'+idEnchere);
       starCountRef.on('value', snapshot => {
         resolve(snapshot.val());
       });
@@ -83,17 +84,18 @@ export class FirebaseService {
   /**
    * Créer une livraison
    *
-   * @param liv la livraison à créer
+   * @param lieuChoisi le lieu de livraison choisi
+   * @param dateChoisie la date de livraison choisie
    * @param idEnchere l'id de l'enchère à livrer
-   * @param encherisseur l'encherisseur à qui la livraison doit être livrée
+   * @param mailAcheteur le mail de l'acheteur
    */
-  createLivraison(liv, idEnchere, encherisseur) {
+  createLivraison(lieuChoisi, dateChoisie, idEnchere, mailAcheteur) {
     return new Promise<any>((resolve, reject) => {
       const currentUser = firebase.auth().currentUser;
       const postData = {
-        date: liv.date,
-        lieu: liv.lieu,
-        mailAch: encherisseur
+        date: dateChoisie,
+        lieu: lieuChoisi,
+        mailAch: mailAcheteur
       };
       const ref = firebase.database().ref('/encheres/livraison/');
       ref.push(postData);
