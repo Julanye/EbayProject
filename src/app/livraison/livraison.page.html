@@ -33,7 +33,7 @@
       <br>
     </ion-item>
   </div>
-  <div>
+  <div *ngIf="!livraisonExiste; else defaultTemplate">
     <ion-item>
       <ion-label position="stacked">Date</ion-label>
       <ion-datetime [(ngModel)]="date" max="2099-10-31" displayFormat="DD-MMM-YYYY"></ion-datetime>
@@ -43,12 +43,25 @@
       <br>
       <ion-input [(ngModel)]="lieu"></ion-input>
     </ion-item>
+    <br>
+    <br>
+    <div align="center">
+      <ion-button (click)="gererLivraison(lieu, date, idEnchere)">Fixer la livraison</ion-button>
+    </div>
   </div>
-  <br>
-  <br>
-  <div align="center">
-    <ion-button (click)="gererLivraison(lieu, date, id)">Fixer la livraison</ion-button>
-  </div>
+  <ng-template #defaultTemplate>
+    <div >
+      <ion-item>
+        <ion-label position="stacked">Date</ion-label>
+        <ion-input disabled="true">{{dateLivraison}}</ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="stacked">Lieu</ion-label>
+        <br>
+        <ion-input disabled="true">{{lieuLivraison}}</ion-input>
+      </ion-item>
+    </div>
+  </ng-template>
 </ion-content>
 
 

@@ -17,6 +17,7 @@ import {AngularFireStorageModule} from '@angular/fire/storage';
 import {environment} from '../environments/environment';
 import {AngularFirestore} from '@angular/fire/firestore';
 import 'firebase/firestore';
+import {DatePipe} from '@angular/common';
 
 @NgModule({
   declarations: [AppComponent],
@@ -30,7 +31,7 @@ import 'firebase/firestore';
     AngularFireDatabaseModule,
     AngularFireStorageModule
   ],
-  providers: [{provide: RouteReuseStrategy, useClass: IonicRouteStrategy}, AngularFirestore],
+  providers: [{provide: RouteReuseStrategy, useClass: IonicRouteStrategy}, AngularFirestore, DatePipe],
   bootstrap: [AppComponent],
 })
 export class AppModule {

@@ -2,7 +2,6 @@ import {Injectable} from '@angular/core';
 import {AngularFireDatabase, AngularFireList, AngularFireObject} from '@angular/fire/database';
 import * as firebase from 'firebase';
 
-
 @Injectable({
   providedIn: 'root'
 })
@@ -86,19 +85,31 @@ export class FirebaseService {
    *
    * @param lieuChoisi le lieu de livraison choisi
    * @param dateChoisie la date de livraison choisie
-   * @param idEnchere l'id de l'enchère à livrer
-   * @param mailAcheteur le mail de l'acheteur
+   * @param idEnch l'id de l'enchère à livrer
+   * @param mailAch le mail de l'acheteur
    */
-  createLivraison(lieuChoisi, dateChoisie, idEnchere, mailAcheteur) {
+  updateLivraison(lieuChoisi, dateChoisie, idEnch, mailAch) {
+    const currentUser = firebase.auth().currentUser;
+    const starCountRef = firebase.database().ref('/encheres/livraison/'+idEnch);
+    starCountRef.update({
+      date: dateChoisie,
+      lieu: lieuChoisi,
+      mailAcheteur: mailAch,
+      mailCreateur: currentUser.email
+    });
+  }
+
+  /**
+   * Récupère la livraison d'une enchère
+   *
+   * @param idEnch l'id de l'enchère à livrer
+   */
+  getLivraison(idEnch){
     return new Promise<any>((resolve, reject) => {
-      const currentUser = firebase.auth().currentUser;
-      const postData = {
-        date: dateChoisie,
-        lieu: lieuChoisi,
-        mailAch: mailAcheteur
-      };
-      const ref = firebase.database().ref('/encheres/livraison/');
-      ref.push(postData);
+      const starCountRef = firebase.database().ref('/encheres/livraison/'+idEnch);
+      starCountRef.on('value', snapshot => {
+        resolve(snapshot.val());
+      });
     });
   }
 
