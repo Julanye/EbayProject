@@ -17,6 +17,7 @@ export class EncheresPage implements OnInit {
 
   ngOnInit() {
     this.initEncheresList(this.encheresList);
+    this.startTimer();
   }
 
   /**
